@@ -1,0 +1,74 @@
+﻿@model IEnumerable<OmniTrackTma_TDB_.Models.mantis_bug_table>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@*@ViewBag.test*@
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@*<select class="form-control">
+    <option></option>
+    @{
+        foreach (var item in Model.Select(i => new { i.last_updated.Month, i.last_updated.Year }).Distinct())
+        {
+
+            <option>@item.Year-@item.Month</option>
+
+
+        }
+
+
+</select>*@
+<table class="table">
+    <tr>
+        @*<th>
+       Anne
+    </th>
+    <th>
+        Mois
+    </th>*@
+    
+        <th>
+            Priorité Non Défini
+        </th>
+        <th>
+            Priorité Basse
+        </th>
+        <th>
+            Priorité Moyenne
+        </th>
+        <th>
+            Priorité Haute
+        </th>
+    </tr>
+
+@foreach (var item in ViewBag.test)
+{
+  
+   
+    <tr>
+       <td>
+       </td>
+
+       <td></td>
+
+        <td></td>
+
+        <td></td>
+
+        <td></td>
+
+        <td></td>
+
+    
+  
+    </tr>
+}
+
+
+
+</table>

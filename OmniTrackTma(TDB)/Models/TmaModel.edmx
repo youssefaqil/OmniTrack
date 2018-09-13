@@ -1,0 +1,1291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OmnitracktmaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="mantis_bug_file_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bug_id" Type="uint" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="diskfile" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="filename" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="folder" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="filesize" Type="int" Nullable="false" />
+          <Property Name="file_type" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="date_added" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="content" Type="longblob" />
+        </EntityType>
+        <EntityType Name="mantis_bug_history_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="bug_id" Type="uint" Nullable="false" />
+          <Property Name="date_modified" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="field_name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="old_value" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="new_value" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="type" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_monitor_table">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="bug_id" />
+          </Key>
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="bug_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_relationship_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="source_bug_id" Type="uint" Nullable="false" />
+          <Property Name="destination_bug_id" Type="uint" Nullable="false" />
+          <Property Name="relationship_type" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="reporter_id" Type="uint" Nullable="false" />
+          <Property Name="handler_id" Type="uint" Nullable="false" />
+          <Property Name="duplicate_id" Type="uint" Nullable="false" />
+          <Property Name="priority" Type="smallint" Nullable="false" />
+          <Property Name="severity" Type="smallint" Nullable="false" />
+          <Property Name="reproducibility" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="resolution" Type="smallint" Nullable="false" />
+          <Property Name="projection" Type="smallint" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="date_submitted" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="last_updated" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="eta" Type="smallint" Nullable="false" />
+          <Property Name="bug_text_id" Type="uint" Nullable="false" />
+          <Property Name="os" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="os_build" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="platform" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="version" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="fixed_in_version" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="build" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="profile_id" Type="uint" Nullable="false" />
+          <Property Name="view_state" Type="smallint" Nullable="false" />
+          <Property Name="summary" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="sponsorship_total" Type="int" Nullable="false" />
+          <Property Name="sticky" Type="tinyint" Nullable="false" />
+          <Property Name="target_version" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_tag_table">
+          <Key>
+            <PropertyRef Name="bug_id" />
+            <PropertyRef Name="tag_id" />
+          </Key>
+          <Property Name="bug_id" Type="uint" Nullable="false" />
+          <Property Name="tag_id" Type="uint" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="date_attached" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_text_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="longtext" Nullable="false" />
+          <Property Name="steps_to_reproduce" Type="longtext" Nullable="false" />
+          <Property Name="additional_information" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bugnote_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bug_id" Type="uint" Nullable="false" />
+          <Property Name="reporter_id" Type="uint" Nullable="false" />
+          <Property Name="bugnote_text_id" Type="uint" Nullable="false" />
+          <Property Name="view_state" Type="smallint" Nullable="false" />
+          <Property Name="date_submitted" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="last_modified" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="note_type" Type="int" />
+          <Property Name="note_attr" Type="varchar" MaxLength="250" />
+          <Property Name="time_tracking" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bugnote_text_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="note" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_config_table">
+          <Key>
+            <PropertyRef Name="config_id" />
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="config_id" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="access_reqd" Type="int" />
+          <Property Name="type" Type="int" />
+          <Property Name="value" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_custom_field_project_table">
+          <Key>
+            <PropertyRef Name="field_id" />
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="field_id" Type="int" Nullable="false" />
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="sequence" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_custom_field_string_table">
+          <Key>
+            <PropertyRef Name="field_id" />
+            <PropertyRef Name="bug_id" />
+          </Key>
+          <Property Name="field_id" Type="int" Nullable="false" />
+          <Property Name="bug_id" Type="int" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_custom_field_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="type" Type="smallint" Nullable="false" />
+          <Property Name="possible_values" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="default_value" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="valid_regexp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="access_level_r" Type="smallint" Nullable="false" />
+          <Property Name="access_level_rw" Type="smallint" Nullable="false" />
+          <Property Name="length_min" Type="int" Nullable="false" />
+          <Property Name="length_max" Type="int" Nullable="false" />
+          <Property Name="advanced" Type="tinyint" Nullable="false" />
+          <Property Name="require_report" Type="tinyint" Nullable="false" />
+          <Property Name="require_update" Type="tinyint" Nullable="false" />
+          <Property Name="display_report" Type="tinyint" Nullable="false" />
+          <Property Name="display_update" Type="tinyint" Nullable="false" />
+          <Property Name="require_resolved" Type="tinyint" Nullable="false" />
+          <Property Name="display_resolved" Type="tinyint" Nullable="false" />
+          <Property Name="display_closed" Type="tinyint" Nullable="false" />
+          <Property Name="require_closed" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_email_table">
+          <Key>
+            <PropertyRef Name="email_id" />
+          </Key>
+          <Property Name="email_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="subject" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="submitted" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="metadata" Type="longtext" Nullable="false" />
+          <Property Name="body" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_filters_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="is_public" Type="tinyint" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="filter_string" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_news_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="poster_id" Type="uint" Nullable="false" />
+          <Property Name="date_posted" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="last_modified" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="view_state" Type="smallint" Nullable="false" />
+          <Property Name="announcement" Type="tinyint" Nullable="false" />
+          <Property Name="headline" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="body" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_category_table">
+          <Key>
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="category" />
+          </Key>
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_file_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="diskfile" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="filename" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="folder" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="filesize" Type="int" Nullable="false" />
+          <Property Name="file_type" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="date_added" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="content" Type="longblob" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.omnitracktma.mantis_project_hierarchy_table' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="mantis_project_hierarchy_table">
+          <Key>
+            <PropertyRef Name="child_id" />
+            <PropertyRef Name="parent_id" />
+          </Key>
+          <Property Name="child_id" Type="uint" Nullable="false" />
+          <Property Name="parent_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="enabled" Type="tinyint" Nullable="false" />
+          <Property Name="view_state" Type="smallint" Nullable="false" />
+          <Property Name="access_min" Type="smallint" Nullable="false" />
+          <Property Name="file_path" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="description" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_user_list_table">
+          <Key>
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="access_level" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_version_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="version" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="date_order" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="description" Type="longtext" Nullable="false" />
+          <Property Name="released" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_sponsorship_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bug_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+          <Property Name="logo" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="paid" Type="tinyint" Nullable="false" />
+          <Property Name="date_submitted" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="last_updated" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_tag_table">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="longtext" Nullable="false" />
+          <Property Name="date_created" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="date_updated" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_tokens_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner" Type="int" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="expiry" Type="datetime" Precision="0" />
+          <Property Name="value" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_pref_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="project_id" Type="uint" Nullable="false" />
+          <Property Name="default_profile" Type="uint" Nullable="false" />
+          <Property Name="default_project" Type="uint" Nullable="false" />
+          <Property Name="advanced_report" Type="tinyint" Nullable="false" />
+          <Property Name="advanced_view" Type="tinyint" Nullable="false" />
+          <Property Name="advanced_update" Type="tinyint" Nullable="false" />
+          <Property Name="refresh_delay" Type="int" Nullable="false" />
+          <Property Name="redirect_delay" Type="tinyint" Nullable="false" />
+          <Property Name="bugnote_order" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="email_on_new" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_assigned" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_feedback" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_resolved" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_closed" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_reopened" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_bugnote" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_status" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_priority" Type="tinyint" Nullable="false" />
+          <Property Name="email_on_priority_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_status_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_bugnote_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_reopened_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_closed_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_resolved_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_feedback_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_assigned_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_on_new_min_severity" Type="smallint" Nullable="false" />
+          <Property Name="email_bugnote_limit" Type="smallint" Nullable="false" />
+          <Property Name="language" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_print_pref_table">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="print_pref" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_profile_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="platform" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="os" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="os_build" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="description" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="realname" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="date_created" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="last_visit" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="enabled" Type="tinyint" Nullable="false" />
+          <Property Name="protected" Type="tinyint" Nullable="false" />
+          <Property Name="access_level" Type="smallint" Nullable="false" />
+          <Property Name="login_count" Type="int" Nullable="false" />
+          <Property Name="lost_password_request_count" Type="smallint" Nullable="false" />
+          <Property Name="failed_login_count" Type="smallint" Nullable="false" />
+          <Property Name="cookie_string" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="OmnitracktmaModelStoreContainer">
+          <EntitySet Name="mantis_bug_file_table" EntityType="Self.mantis_bug_file_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bug_history_table" EntityType="Self.mantis_bug_history_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bug_monitor_table" EntityType="Self.mantis_bug_monitor_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bug_relationship_table" EntityType="Self.mantis_bug_relationship_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bug_table" EntityType="Self.mantis_bug_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bug_tag_table" EntityType="Self.mantis_bug_tag_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bug_text_table" EntityType="Self.mantis_bug_text_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bugnote_table" EntityType="Self.mantis_bugnote_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_bugnote_text_table" EntityType="Self.mantis_bugnote_text_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_config_table" EntityType="Self.mantis_config_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_custom_field_project_table" EntityType="Self.mantis_custom_field_project_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_custom_field_string_table" EntityType="Self.mantis_custom_field_string_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_custom_field_table" EntityType="Self.mantis_custom_field_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_email_table" EntityType="Self.mantis_email_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_filters_table" EntityType="Self.mantis_filters_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_news_table" EntityType="Self.mantis_news_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_project_category_table" EntityType="Self.mantis_project_category_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_project_file_table" EntityType="Self.mantis_project_file_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_project_table" EntityType="Self.mantis_project_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_project_user_list_table" EntityType="Self.mantis_project_user_list_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_project_version_table" EntityType="Self.mantis_project_version_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_sponsorship_table" EntityType="Self.mantis_sponsorship_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_tag_table" EntityType="Self.mantis_tag_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_tokens_table" EntityType="Self.mantis_tokens_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_user_pref_table" EntityType="Self.mantis_user_pref_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_user_print_pref_table" EntityType="Self.mantis_user_print_pref_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_user_profile_table" EntityType="Self.mantis_user_profile_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_user_table" EntityType="Self.mantis_user_table" Schema="omnitracktma" store:Type="Tables" />
+          <EntitySet Name="mantis_project_hierarchy_table" EntityType="Self.mantis_project_hierarchy_table" store:Type="Tables" store:Schema="omnitracktma">
+            <DefiningQuery>SELECT
+`mantis_project_hierarchy_table`.`child_id`, 
+`mantis_project_hierarchy_table`.`parent_id`
+FROM `mantis_project_hierarchy_table` AS `mantis_project_hierarchy_table`</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OmnitracktmaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="mantis_bug_file_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bug_id" Type="Int64" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="diskfile" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filename" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="folder" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filesize" Type="Int32" Nullable="false" />
+          <Property Name="file_type" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_added" Type="DateTime" Nullable="false" />
+          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_history_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="bug_id" Type="Int64" Nullable="false" />
+          <Property Name="date_modified" Type="DateTime" Nullable="false" />
+          <Property Name="field_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="old_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="new_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_monitor_table">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="bug_id" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="bug_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_relationship_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="source_bug_id" Type="Int64" Nullable="false" />
+          <Property Name="destination_bug_id" Type="Int64" Nullable="false" />
+          <Property Name="relationship_type" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="reporter_id" Type="Int64" Nullable="false" />
+          <Property Name="handler_id" Type="Int64" Nullable="false" />
+          <Property Name="duplicate_id" Type="Int64" Nullable="false" />
+          <Property Name="priority" Type="Int16" Nullable="false" />
+          <Property Name="severity" Type="Int16" Nullable="false" />
+          <Property Name="reproducibility" Type="Int16" Nullable="false" />
+          <Property Name="status" Type="Int16" Nullable="false" />
+          <Property Name="resolution" Type="Int16" Nullable="false" />
+          <Property Name="projection" Type="Int16" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_submitted" Type="DateTime" Nullable="false" />
+          <Property Name="last_updated" Type="DateTime" Nullable="false" />
+          <Property Name="eta" Type="Int16" Nullable="false" />
+          <Property Name="bug_text_id" Type="Int64" Nullable="false" />
+          <Property Name="os" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="os_build" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="platform" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="version" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fixed_in_version" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="build" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profile_id" Type="Int64" Nullable="false" />
+          <Property Name="view_state" Type="Int16" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sponsorship_total" Type="Int32" Nullable="false" />
+          <Property Name="sticky" Type="SByte" Nullable="false" />
+          <Property Name="target_version" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_tag_table">
+          <Key>
+            <PropertyRef Name="bug_id" />
+            <PropertyRef Name="tag_id" />
+          </Key>
+          <Property Name="bug_id" Type="Int64" Nullable="false" />
+          <Property Name="tag_id" Type="Int64" Nullable="false" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="date_attached" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bug_text_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="steps_to_reproduce" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="additional_information" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bugnote_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bug_id" Type="Int64" Nullable="false" />
+          <Property Name="reporter_id" Type="Int64" Nullable="false" />
+          <Property Name="bugnote_text_id" Type="Int64" Nullable="false" />
+          <Property Name="view_state" Type="Int16" Nullable="false" />
+          <Property Name="date_submitted" Type="DateTime" Nullable="false" />
+          <Property Name="last_modified" Type="DateTime" Nullable="false" />
+          <Property Name="note_type" Type="Int32" />
+          <Property Name="note_attr" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="time_tracking" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_bugnote_text_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="note" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_config_table">
+          <Key>
+            <PropertyRef Name="config_id" />
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="config_id" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="access_reqd" Type="Int32" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_custom_field_project_table">
+          <Key>
+            <PropertyRef Name="field_id" />
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="field_id" Type="Int32" Nullable="false" />
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="sequence" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_custom_field_string_table">
+          <Key>
+            <PropertyRef Name="field_id" />
+            <PropertyRef Name="bug_id" />
+          </Key>
+          <Property Name="field_id" Type="Int32" Nullable="false" />
+          <Property Name="bug_id" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_custom_field_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="Int16" Nullable="false" />
+          <Property Name="possible_values" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="default_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valid_regexp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="access_level_r" Type="Int16" Nullable="false" />
+          <Property Name="access_level_rw" Type="Int16" Nullable="false" />
+          <Property Name="length_min" Type="Int32" Nullable="false" />
+          <Property Name="length_max" Type="Int32" Nullable="false" />
+          <Property Name="advanced" Type="SByte" Nullable="false" />
+          <Property Name="require_report" Type="SByte" Nullable="false" />
+          <Property Name="require_update" Type="SByte" Nullable="false" />
+          <Property Name="display_report" Type="SByte" Nullable="false" />
+          <Property Name="display_update" Type="SByte" Nullable="false" />
+          <Property Name="require_resolved" Type="SByte" Nullable="false" />
+          <Property Name="display_resolved" Type="SByte" Nullable="false" />
+          <Property Name="display_closed" Type="SByte" Nullable="false" />
+          <Property Name="require_closed" Type="SByte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_email_table">
+          <Key>
+            <PropertyRef Name="email_id" />
+          </Key>
+          <Property Name="email_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subject" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="submitted" Type="DateTime" Nullable="false" />
+          <Property Name="metadata" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_filters_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="is_public" Type="SByte" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filter_string" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_news_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="poster_id" Type="Int64" Nullable="false" />
+          <Property Name="date_posted" Type="DateTime" Nullable="false" />
+          <Property Name="last_modified" Type="DateTime" Nullable="false" />
+          <Property Name="view_state" Type="Int16" Nullable="false" />
+          <Property Name="announcement" Type="SByte" Nullable="false" />
+          <Property Name="headline" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_category_table">
+          <Key>
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="category" />
+          </Key>
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_file_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="diskfile" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filename" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="folder" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filesize" Type="Int32" Nullable="false" />
+          <Property Name="file_type" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_added" Type="DateTime" Nullable="false" />
+          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Int16" Nullable="false" />
+          <Property Name="enabled" Type="SByte" Nullable="false" />
+          <Property Name="view_state" Type="Int16" Nullable="false" />
+          <Property Name="access_min" Type="Int16" Nullable="false" />
+          <Property Name="file_path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_user_list_table">
+          <Key>
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="access_level" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_version_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="version" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_order" Type="DateTime" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="released" Type="SByte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_sponsorship_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bug_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="logo" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="paid" Type="SByte" Nullable="false" />
+          <Property Name="date_submitted" Type="DateTime" Nullable="false" />
+          <Property Name="last_updated" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_tag_table">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_created" Type="DateTime" Nullable="false" />
+          <Property Name="date_updated" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_tokens_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" />
+          <Property Name="expiry" Type="DateTime" />
+          <Property Name="value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_pref_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="project_id" Type="Int64" Nullable="false" />
+          <Property Name="default_profile" Type="Int64" Nullable="false" />
+          <Property Name="default_project" Type="Int64" Nullable="false" />
+          <Property Name="advanced_report" Type="SByte" Nullable="false" />
+          <Property Name="advanced_view" Type="SByte" Nullable="false" />
+          <Property Name="advanced_update" Type="SByte" Nullable="false" />
+          <Property Name="refresh_delay" Type="Int32" Nullable="false" />
+          <Property Name="redirect_delay" Type="SByte" Nullable="false" />
+          <Property Name="bugnote_order" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email_on_new" Type="SByte" Nullable="false" />
+          <Property Name="email_on_assigned" Type="SByte" Nullable="false" />
+          <Property Name="email_on_feedback" Type="SByte" Nullable="false" />
+          <Property Name="email_on_resolved" Type="SByte" Nullable="false" />
+          <Property Name="email_on_closed" Type="SByte" Nullable="false" />
+          <Property Name="email_on_reopened" Type="SByte" Nullable="false" />
+          <Property Name="email_on_bugnote" Type="SByte" Nullable="false" />
+          <Property Name="email_on_status" Type="SByte" Nullable="false" />
+          <Property Name="email_on_priority" Type="SByte" Nullable="false" />
+          <Property Name="email_on_priority_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_status_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_bugnote_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_reopened_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_closed_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_resolved_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_feedback_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_assigned_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_on_new_min_severity" Type="Int16" Nullable="false" />
+          <Property Name="email_bugnote_limit" Type="Int16" Nullable="false" />
+          <Property Name="language" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_print_pref_table">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="print_pref" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_profile_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="platform" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="os" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="os_build" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_user_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="realname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_created" Type="DateTime" Nullable="false" />
+          <Property Name="last_visit" Type="DateTime" Nullable="false" />
+          <Property Name="enabled" Type="SByte" Nullable="false" />
+          <Property Name="protected" Type="SByte" Nullable="false" />
+          <Property Name="access_level" Type="Int16" Nullable="false" />
+          <Property Name="login_count" Type="Int32" Nullable="false" />
+          <Property Name="lost_password_request_count" Type="Int16" Nullable="false" />
+          <Property Name="failed_login_count" Type="Int16" Nullable="false" />
+          <Property Name="cookie_string" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantis_project_hierarchy_table">
+          <Key>
+            <PropertyRef Name="child_id" />
+            <PropertyRef Name="parent_id" />
+          </Key>
+          <Property Name="child_id" Type="Int64" Nullable="false" />
+          <Property Name="parent_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="OmnitracktmaContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="mantis_bug_file_table" EntityType="Self.mantis_bug_file_table" />
+          <EntitySet Name="mantis_bug_history_table" EntityType="Self.mantis_bug_history_table" />
+          <EntitySet Name="mantis_bug_monitor_table" EntityType="Self.mantis_bug_monitor_table" />
+          <EntitySet Name="mantis_bug_relationship_table" EntityType="Self.mantis_bug_relationship_table" />
+          <EntitySet Name="mantis_bug_table" EntityType="Self.mantis_bug_table" />
+          <EntitySet Name="mantis_bug_tag_table" EntityType="Self.mantis_bug_tag_table" />
+          <EntitySet Name="mantis_bug_text_table" EntityType="Self.mantis_bug_text_table" />
+          <EntitySet Name="mantis_bugnote_table" EntityType="Self.mantis_bugnote_table" />
+          <EntitySet Name="mantis_bugnote_text_table" EntityType="Self.mantis_bugnote_text_table" />
+          <EntitySet Name="mantis_config_table" EntityType="Self.mantis_config_table" />
+          <EntitySet Name="mantis_custom_field_project_table" EntityType="Self.mantis_custom_field_project_table" />
+          <EntitySet Name="mantis_custom_field_string_table" EntityType="Self.mantis_custom_field_string_table" />
+          <EntitySet Name="mantis_custom_field_table" EntityType="Self.mantis_custom_field_table" />
+          <EntitySet Name="mantis_email_table" EntityType="Self.mantis_email_table" />
+          <EntitySet Name="mantis_filters_table" EntityType="Self.mantis_filters_table" />
+          <EntitySet Name="mantis_news_table" EntityType="Self.mantis_news_table" />
+          <EntitySet Name="mantis_project_category_table" EntityType="Self.mantis_project_category_table" />
+          <EntitySet Name="mantis_project_file_table" EntityType="Self.mantis_project_file_table" />
+          <EntitySet Name="mantis_project_table" EntityType="Self.mantis_project_table" />
+          <EntitySet Name="mantis_project_user_list_table" EntityType="Self.mantis_project_user_list_table" />
+          <EntitySet Name="mantis_project_version_table" EntityType="Self.mantis_project_version_table" />
+          <EntitySet Name="mantis_sponsorship_table" EntityType="Self.mantis_sponsorship_table" />
+          <EntitySet Name="mantis_tag_table" EntityType="Self.mantis_tag_table" />
+          <EntitySet Name="mantis_tokens_table" EntityType="Self.mantis_tokens_table" />
+          <EntitySet Name="mantis_user_pref_table" EntityType="Self.mantis_user_pref_table" />
+          <EntitySet Name="mantis_user_print_pref_table" EntityType="Self.mantis_user_print_pref_table" />
+          <EntitySet Name="mantis_user_profile_table" EntityType="Self.mantis_user_profile_table" />
+          <EntitySet Name="mantis_user_table" EntityType="Self.mantis_user_table" />
+          <EntitySet Name="mantis_project_hierarchy_table" EntityType="Self.mantis_project_hierarchy_table" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OmnitracktmaModelStoreContainer" CdmEntityContainer="OmnitracktmaContext">
+          <EntitySetMapping Name="mantis_bug_file_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bug_file_table">
+              <MappingFragment StoreEntitySet="mantis_bug_file_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bug_id" ColumnName="bug_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="diskfile" ColumnName="diskfile" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="folder" ColumnName="folder" />
+                <ScalarProperty Name="filesize" ColumnName="filesize" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bug_history_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bug_history_table">
+              <MappingFragment StoreEntitySet="mantis_bug_history_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="bug_id" ColumnName="bug_id" />
+                <ScalarProperty Name="date_modified" ColumnName="date_modified" />
+                <ScalarProperty Name="field_name" ColumnName="field_name" />
+                <ScalarProperty Name="old_value" ColumnName="old_value" />
+                <ScalarProperty Name="new_value" ColumnName="new_value" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bug_monitor_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bug_monitor_table">
+              <MappingFragment StoreEntitySet="mantis_bug_monitor_table">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="bug_id" ColumnName="bug_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bug_relationship_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bug_relationship_table">
+              <MappingFragment StoreEntitySet="mantis_bug_relationship_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="source_bug_id" ColumnName="source_bug_id" />
+                <ScalarProperty Name="destination_bug_id" ColumnName="destination_bug_id" />
+                <ScalarProperty Name="relationship_type" ColumnName="relationship_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bug_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bug_table">
+              <MappingFragment StoreEntitySet="mantis_bug_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="reporter_id" ColumnName="reporter_id" />
+                <ScalarProperty Name="handler_id" ColumnName="handler_id" />
+                <ScalarProperty Name="duplicate_id" ColumnName="duplicate_id" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="severity" ColumnName="severity" />
+                <ScalarProperty Name="reproducibility" ColumnName="reproducibility" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="resolution" ColumnName="resolution" />
+                <ScalarProperty Name="projection" ColumnName="projection" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+                <ScalarProperty Name="last_updated" ColumnName="last_updated" />
+                <ScalarProperty Name="eta" ColumnName="eta" />
+                <ScalarProperty Name="bug_text_id" ColumnName="bug_text_id" />
+                <ScalarProperty Name="os" ColumnName="os" />
+                <ScalarProperty Name="os_build" ColumnName="os_build" />
+                <ScalarProperty Name="platform" ColumnName="platform" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="fixed_in_version" ColumnName="fixed_in_version" />
+                <ScalarProperty Name="build" ColumnName="build" />
+                <ScalarProperty Name="profile_id" ColumnName="profile_id" />
+                <ScalarProperty Name="view_state" ColumnName="view_state" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="sponsorship_total" ColumnName="sponsorship_total" />
+                <ScalarProperty Name="sticky" ColumnName="sticky" />
+                <ScalarProperty Name="target_version" ColumnName="target_version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bug_tag_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bug_tag_table">
+              <MappingFragment StoreEntitySet="mantis_bug_tag_table">
+                <ScalarProperty Name="bug_id" ColumnName="bug_id" />
+                <ScalarProperty Name="tag_id" ColumnName="tag_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="date_attached" ColumnName="date_attached" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bug_text_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bug_text_table">
+              <MappingFragment StoreEntitySet="mantis_bug_text_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="steps_to_reproduce" ColumnName="steps_to_reproduce" />
+                <ScalarProperty Name="additional_information" ColumnName="additional_information" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bugnote_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bugnote_table">
+              <MappingFragment StoreEntitySet="mantis_bugnote_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bug_id" ColumnName="bug_id" />
+                <ScalarProperty Name="reporter_id" ColumnName="reporter_id" />
+                <ScalarProperty Name="bugnote_text_id" ColumnName="bugnote_text_id" />
+                <ScalarProperty Name="view_state" ColumnName="view_state" />
+                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
+                <ScalarProperty Name="note_type" ColumnName="note_type" />
+                <ScalarProperty Name="note_attr" ColumnName="note_attr" />
+                <ScalarProperty Name="time_tracking" ColumnName="time_tracking" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_bugnote_text_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_bugnote_text_table">
+              <MappingFragment StoreEntitySet="mantis_bugnote_text_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_config_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_config_table">
+              <MappingFragment StoreEntitySet="mantis_config_table">
+                <ScalarProperty Name="config_id" ColumnName="config_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="access_reqd" ColumnName="access_reqd" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_custom_field_project_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_custom_field_project_table">
+              <MappingFragment StoreEntitySet="mantis_custom_field_project_table">
+                <ScalarProperty Name="field_id" ColumnName="field_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="sequence" ColumnName="sequence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_custom_field_string_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_custom_field_string_table">
+              <MappingFragment StoreEntitySet="mantis_custom_field_string_table">
+                <ScalarProperty Name="field_id" ColumnName="field_id" />
+                <ScalarProperty Name="bug_id" ColumnName="bug_id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_custom_field_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_custom_field_table">
+              <MappingFragment StoreEntitySet="mantis_custom_field_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="possible_values" ColumnName="possible_values" />
+                <ScalarProperty Name="default_value" ColumnName="default_value" />
+                <ScalarProperty Name="valid_regexp" ColumnName="valid_regexp" />
+                <ScalarProperty Name="access_level_r" ColumnName="access_level_r" />
+                <ScalarProperty Name="access_level_rw" ColumnName="access_level_rw" />
+                <ScalarProperty Name="length_min" ColumnName="length_min" />
+                <ScalarProperty Name="length_max" ColumnName="length_max" />
+                <ScalarProperty Name="advanced" ColumnName="advanced" />
+                <ScalarProperty Name="require_report" ColumnName="require_report" />
+                <ScalarProperty Name="require_update" ColumnName="require_update" />
+                <ScalarProperty Name="display_report" ColumnName="display_report" />
+                <ScalarProperty Name="display_update" ColumnName="display_update" />
+                <ScalarProperty Name="require_resolved" ColumnName="require_resolved" />
+                <ScalarProperty Name="display_resolved" ColumnName="display_resolved" />
+                <ScalarProperty Name="display_closed" ColumnName="display_closed" />
+                <ScalarProperty Name="require_closed" ColumnName="require_closed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_email_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_email_table">
+              <MappingFragment StoreEntitySet="mantis_email_table">
+                <ScalarProperty Name="email_id" ColumnName="email_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="submitted" ColumnName="submitted" />
+                <ScalarProperty Name="metadata" ColumnName="metadata" />
+                <ScalarProperty Name="body" ColumnName="body" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_filters_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_filters_table">
+              <MappingFragment StoreEntitySet="mantis_filters_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="is_public" ColumnName="is_public" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="filter_string" ColumnName="filter_string" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_news_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_news_table">
+              <MappingFragment StoreEntitySet="mantis_news_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="poster_id" ColumnName="poster_id" />
+                <ScalarProperty Name="date_posted" ColumnName="date_posted" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
+                <ScalarProperty Name="view_state" ColumnName="view_state" />
+                <ScalarProperty Name="announcement" ColumnName="announcement" />
+                <ScalarProperty Name="headline" ColumnName="headline" />
+                <ScalarProperty Name="body" ColumnName="body" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_project_category_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_project_category_table">
+              <MappingFragment StoreEntitySet="mantis_project_category_table">
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_project_file_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_project_file_table">
+              <MappingFragment StoreEntitySet="mantis_project_file_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="diskfile" ColumnName="diskfile" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="folder" ColumnName="folder" />
+                <ScalarProperty Name="filesize" ColumnName="filesize" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_project_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_project_table">
+              <MappingFragment StoreEntitySet="mantis_project_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="view_state" ColumnName="view_state" />
+                <ScalarProperty Name="access_min" ColumnName="access_min" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_project_user_list_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_project_user_list_table">
+              <MappingFragment StoreEntitySet="mantis_project_user_list_table">
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="access_level" ColumnName="access_level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_project_version_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_project_version_table">
+              <MappingFragment StoreEntitySet="mantis_project_version_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="date_order" ColumnName="date_order" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="released" ColumnName="released" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_sponsorship_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_sponsorship_table">
+              <MappingFragment StoreEntitySet="mantis_sponsorship_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bug_id" ColumnName="bug_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+                <ScalarProperty Name="last_updated" ColumnName="last_updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_tag_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_tag_table">
+              <MappingFragment StoreEntitySet="mantis_tag_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="date_updated" ColumnName="date_updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_tokens_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_tokens_table">
+              <MappingFragment StoreEntitySet="mantis_tokens_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="expiry" ColumnName="expiry" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_user_pref_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_user_pref_table">
+              <MappingFragment StoreEntitySet="mantis_user_pref_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="default_profile" ColumnName="default_profile" />
+                <ScalarProperty Name="default_project" ColumnName="default_project" />
+                <ScalarProperty Name="advanced_report" ColumnName="advanced_report" />
+                <ScalarProperty Name="advanced_view" ColumnName="advanced_view" />
+                <ScalarProperty Name="advanced_update" ColumnName="advanced_update" />
+                <ScalarProperty Name="refresh_delay" ColumnName="refresh_delay" />
+                <ScalarProperty Name="redirect_delay" ColumnName="redirect_delay" />
+                <ScalarProperty Name="bugnote_order" ColumnName="bugnote_order" />
+                <ScalarProperty Name="email_on_new" ColumnName="email_on_new" />
+                <ScalarProperty Name="email_on_assigned" ColumnName="email_on_assigned" />
+                <ScalarProperty Name="email_on_feedback" ColumnName="email_on_feedback" />
+                <ScalarProperty Name="email_on_resolved" ColumnName="email_on_resolved" />
+                <ScalarProperty Name="email_on_closed" ColumnName="email_on_closed" />
+                <ScalarProperty Name="email_on_reopened" ColumnName="email_on_reopened" />
+                <ScalarProperty Name="email_on_bugnote" ColumnName="email_on_bugnote" />
+                <ScalarProperty Name="email_on_status" ColumnName="email_on_status" />
+                <ScalarProperty Name="email_on_priority" ColumnName="email_on_priority" />
+                <ScalarProperty Name="email_on_priority_min_severity" ColumnName="email_on_priority_min_severity" />
+                <ScalarProperty Name="email_on_status_min_severity" ColumnName="email_on_status_min_severity" />
+                <ScalarProperty Name="email_on_bugnote_min_severity" ColumnName="email_on_bugnote_min_severity" />
+                <ScalarProperty Name="email_on_reopened_min_severity" ColumnName="email_on_reopened_min_severity" />
+                <ScalarProperty Name="email_on_closed_min_severity" ColumnName="email_on_closed_min_severity" />
+                <ScalarProperty Name="email_on_resolved_min_severity" ColumnName="email_on_resolved_min_severity" />
+                <ScalarProperty Name="email_on_feedback_min_severity" ColumnName="email_on_feedback_min_severity" />
+                <ScalarProperty Name="email_on_assigned_min_severity" ColumnName="email_on_assigned_min_severity" />
+                <ScalarProperty Name="email_on_new_min_severity" ColumnName="email_on_new_min_severity" />
+                <ScalarProperty Name="email_bugnote_limit" ColumnName="email_bugnote_limit" />
+                <ScalarProperty Name="language" ColumnName="language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_user_print_pref_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_user_print_pref_table">
+              <MappingFragment StoreEntitySet="mantis_user_print_pref_table">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="print_pref" ColumnName="print_pref" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_user_profile_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_user_profile_table">
+              <MappingFragment StoreEntitySet="mantis_user_profile_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="platform" ColumnName="platform" />
+                <ScalarProperty Name="os" ColumnName="os" />
+                <ScalarProperty Name="os_build" ColumnName="os_build" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_user_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_user_table">
+              <MappingFragment StoreEntitySet="mantis_user_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="realname" ColumnName="realname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="last_visit" ColumnName="last_visit" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="protected" ColumnName="protected" />
+                <ScalarProperty Name="access_level" ColumnName="access_level" />
+                <ScalarProperty Name="login_count" ColumnName="login_count" />
+                <ScalarProperty Name="lost_password_request_count" ColumnName="lost_password_request_count" />
+                <ScalarProperty Name="failed_login_count" ColumnName="failed_login_count" />
+                <ScalarProperty Name="cookie_string" ColumnName="cookie_string" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantis_project_hierarchy_table">
+            <EntityTypeMapping TypeName="OmnitracktmaModel.mantis_project_hierarchy_table">
+              <MappingFragment StoreEntitySet="mantis_project_hierarchy_table">
+                <ScalarProperty Name="child_id" ColumnName="child_id" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
