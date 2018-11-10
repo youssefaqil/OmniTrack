@@ -1,0 +1,1453 @@
+﻿@model IEnumerable<OmnitrackTma.Models.mantis_bug_table>
+
+@{
+    ViewBag.Title = "Voulemetrie des Incidents";
+}
+  
+
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>
+                                    Volumétrie des incidents de la TMA
+
+                                </h3>
+                            </div>
+                            <h1>
+                                @ViewBag.date
+                            </h1>
+                           
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Les Projet TMA</h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <br />
+                                    <form class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Selectionnez le Projet</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                @Html.DropDownList("Projet", new SelectList(ViewBag.projet, "id", "name"), "Selectionez Un Projet", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Selectionnez l'Année</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                @Html.DropDownList("DataYear", new SelectList(string.Empty, "value", "Text"), new { @class = "form-control"@*,Onclick = "desactiverPriorite()"*@ })
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Volumétrie globale<small> (toutes priorités)</small></h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th class="tdb">Entrées</th>
+                                                    <th class="tdb"> Sortie</th>
+                                                    <th class="tdb">En stock</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Janvier</th>
+                                                    <td id="Janvier1"></td>
+                                                    <td id="Janvier2"></td>
+                                                    <td id="Janvier3"></td>
+                                                </tr>
+                                                     <tr>
+                                                    <th scope="row" class="tdb">Février</th>
+                                                    <td id="Fevrier1"></td>
+                                                    <td id="Fevrier2"></td>
+                                                    <td id="Fevrier3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Mars">Mars</th>
+                                                    <td id="Mars1"></td>
+                                                    <td id="Mars2"></td>
+                                                    <td id="Mars3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Avril">Avril</th>
+                                                    <td id="Avril1"></td>
+                                                    <td id="Avril2"></td>
+                                                    <td id="Avril3"></td>
+                                                </tr>
+                                                  <tr>
+                                                    <th scope="row" class="tdb" id="Mai">Mai</th>
+                                                    <td id="Mai1"></td>
+                                                    <td id="Mai2"></td>
+                                                    <td id="Mai3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Juin">Juin</th>
+                                                    <td id="Juin1"></td>
+                                                    <td id="Juin2"></td>
+                                                    <td id="Juin3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Juillet">Juillet</th>
+                                                    <td id="Juillet1"></td>
+                                                    <td id="Juillet2"></td>
+                                                    <td id="Juillet3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Août">Août</th>
+                                                    <td id="Aout1"></td>
+                                                    <td id="Aout2"></td>
+                                                    <td id="Aout3"></td>
+                                                </tr>
+                                               
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Septembre">Septembre</th>
+                                                    <td id="Septembre1"></td>
+                                                    <td id="Septembre2"></td>
+                                                    <td id="Septembre3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Octobre">Octobre</th>
+                                                    <td id="Octobre1"></td>
+                                                    <td id="Octobre2"></td>
+                                                    <td id="Octobre3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Novembre">Novembre</th>
+                                                    <td id="Novembre1"></td>
+                                                    <td id="Novembre2"></td>
+                                                    <td id="Novembre3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Décembre">Décembre</th>
+                                                    <td id="Decembre1"></td>
+                                                    <td id="Decembre2"></td>
+                                                    <td id="Decembre3"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        Nombre d'incidents reçus, en stock et terminés
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        @*<canvas id="canvas_bar1"></canvas>*@
+                                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Voulumétrie des incidents de :</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <br />
+                                        <form class="form-horizontal form-label-left" name="form2">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"> select Priorité *</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <select class="form-control" id="priorite" disabled=true>
+                                                        <option>Priorité</option>
+                                                        <option value="40">Priorité Haute</option>
+                                                        <option value="30">Priorité Moyenne</option>
+                                                        <option value="20">Priorité Basse</option>
+                                                        <option value="10">Priorité Non Définie</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+
+                                    <div class="x_content">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th class="tdb">Entrées</th>
+                                                    <th class="tdb"> Sortie</th>
+                                                    <th class="tdb">En stock</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Janvier</th>
+                                                    <td id="janvier1"></td>
+                                                    <td id="janvier2"></td>
+                                                    <td id="janvier3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Février</th>
+                                                    <td id="fevrier1"></td>
+                                                    <td id="fevrier2"></td>
+                                                    <td id="fevrier3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Mars">Mars</th>
+                                                    <td id="mars1"></td>
+                                                    <td id="mars2"></td>
+                                                    <td id="mars3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Avril">Avril</th>
+                                                    <td id="avril1"></td>
+                                                    <td id="avril2"></td>
+                                                    <td id="avril3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Mai">Mai</th>
+                                                    <td id="mai1"></td>
+                                                    <td id="mai2"></td>
+                                                    <td id="mai3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Juin">Juin</th>
+                                                    <td id="juin1"></td>
+                                                    <td id="juin2"></td>
+                                                    <td id="juin3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Juillet">Juillet</th>
+                                                    <td id="juillet1"></td>
+                                                    <td id="juillet2"></td>
+                                                    <td id="juillet3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Août">Août</th>
+                                                    <td id="aout1"></td>
+                                                    <td id="aout2"></td>
+                                                    <td id="aout3"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Septembre">Septembre</th>
+                                                    <td id="septembre1"></td>
+                                                    <td id="septembre2"></td>
+                                                    <td id="septembre3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Octobre">Octobre</th>
+                                                    <td id="octobre1"></td>
+                                                    <td id="octobre2"></td>
+                                                    <td id="octobre3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Novembre">Novembre</th>
+                                                    <td id="novembre1"></td>
+                                                    <td id="novembre2"></td>
+                                                    <td id="novembre3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb" id="Décembre">Décembre</th>
+                                                    <td id="decembre1"></td>
+                                                    <td id="decembre2"></td>
+                                                    <td id="decembre3"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        Nombre d'incidents de priorité 1 reçus, en stock et terminés
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        @*<canvas id="canvas_bar2"></canvas>*@
+                                        <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="width: 1100px;">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Commontaire le CP</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+
+                                        <form name="form1" class="form-horizontal form-label-left" novalidate>
+
+                                            <fieldset>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                                                        Commantaire<span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        @Html.TextArea("Commantaire", null, new { @class = "form-control", @disabled = true })
+                                                        @*<textarea id="Commantaire" required="required" name="textarea" class="form-control col-md-7 col-xs-12"></textarea>*@
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <input class="btn btn-default" type="button" value="Modifier" id="cmt" onclick="desactiver()">
+                                                        <button class="btn btn-primary" style="background-color: #0F0090;color: #fff !important;" id="enregistre">Enregistrer</button>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- footer content -->
+                        <footer>
+                            <div class="">
+                                <p class="pull-right">
+                                    TMA. |
+                                    <span class="lead"> <i class="fa fa-paw"></i> TDB!</span>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </footer>
+                        <!-- /footer content -->
+
+                    </div>
+                    <!-- /page content -->
+               
+<script>
+
+    $(document).ready(function () {
+
+        var tab = new Array;
+         tab[1] = "Janvier";
+        tab[2] = "Février";
+        tab[3] = "Mars";
+        tab[4] = "Avril";
+        tab[5] = "Mai";
+        tab[6] = "Juin";
+        tab[7] = "Juillet";
+        tab[8] = "Août";
+        tab[9] = "Septembre";
+        tab[10] = "Octobre";
+        tab[11] = "novembre";
+        tab[12] = "décembre";
+
+        $("#Projet").change(function () {
+            $('#DataYear').empty();
+            $("#Commantaire").empty();
+            $("#Janvier1").empty(); $("#Janvier2").empty(); $("#Janvier3").empty();
+            $("#Fevrier1").empty(); $("#Fevrier2").empty(); $("#Fevrier3").empty();
+            $("#Mars1").empty(); $("#Mars2").empty(); $("#Mars3").empty();
+            $("#Avril1").empty(); $("#Avril2").empty(); $("#Avril3").empty();
+            $("#Mai1").empty(); $("#Mai2").empty(); $("#Mai3").empty();
+            $("#Juin1").empty(); $("#Juin2").empty(); $("#Juin3").empty();
+            $("#Juillet1").empty(); $("#Juillet2").empty(); $("#Juillet3").empty();
+            $("#Aout1").empty(); $("#Aout2").empty(); $("#Aout3").empty();
+            $("#Septembre1").empty(); $("#Septembre2").empty(); $("#Septembre3").empty();
+            $("#Octobre1").empty(); $("#Octobre2").empty(); $("#Octobre3").empty();
+            $("#Novembre1").empty(); $("#Novembre2").empty(); $("#Novembre3").empty();
+            $("#Decembre1").empty(); $("#Decembre2").empty(); $("#Decembre3").empty();
+            //____________________________priorite par mois_____________________________
+            $("#janvier1").empty(); $("#janvier2").empty(); $("#janvier3").empty();
+            $("#fevrier1").empty(); $("#fevrier2").empty(); $("#fevrier3").empty();
+            $("#mars1").empty(); $("#mars2").empty(); $("#mars3").empty();
+            $("#avril1").empty(); $("#avril2").empty(); $("#avril3").empty();
+            $("#mai1").empty(); $("#mai2").empty(); $("#mai3").empty();
+            $("#juin1").empty(); $("#juin2").empty(); $("#juin3").empty();
+            $("#juillet1").empty(); $("#juillet2").empty(); $("#juillet3").empty();
+            $("#aout1").empty(); $("#aout2").empty(); $("#aout3").empty();
+            $("#septembre1").empty(); $("#septembre2").empty(); $("#septembre3").empty();
+            $("#octobre1").empty(); $("#octobre2").empty(); $("#octobre3").empty();
+            $("#novembre1").empty(); $("#novembre2").empty(); $("#novembre3").empty();
+            $("#decembre1").empty(); $("#decembre2").empty(); $("#decembre3").empty();
+            //____________________________priorite par mois_____________________________
+            $.ajax({
+                url: "@Url.Action("GetYearbyProject", "VoulemetrieIncident")",
+               
+                data: { p: $('#Projet').val() },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+
+                    $('#DataYear').append("<option>Selectionnez Année</option>");
+                    for (var i = 0; i < data.length; i++) {
+
+
+                        $('#DataYear').append('<option value="' + data[i].Year + '">' + data[i].Year + '</option>');
+
+                    }
+                },
+
+            });
+        });
+ 
+        //emplire drop down Name
+        $('#DataYear').change(function () {
+            
+            $("#DataYear").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#priorite").prop("disabled", true);
+                } else {
+                    $("#priorite").prop("disabled", false);
+                }
+            });
+           
+            $("#Commantaire").empty();
+            var entre1 = 0, entre2 = 0, entre3 = 0, entre4 = 0, entre5 = 0, entre6 = 0, entre7 = 0, entre8 = 0, entre9 = 0, entre10 = 0, entre11 = 0, entre12 = 0;
+            var sortie1 = 0, sortie2 = 0, sortie3 = 0, sortie4 = 0, sortie5 = 0, sortie6 = 0, sortie7 = 0, sortie8 = 0, sortie9 = 0, sortie10 = 0, sortie11 = 0, sortie12 = 0;
+            var stock1 = 0, stock2 = 0, stock3 = 0, stock4 = 0, stock5 = 0, stock6 = 0, stock7 = 0, stock8 = 0, stock9 = 0, stock10 = 0, stock11 = 0, stock12 = 0;
+            $("#Janvier1").empty(); $("#Janvier2").empty(); $("#Janvier2").empty();
+            $("#Fevrier1").empty(); $("#Fevrier2").empty(); $("#Fevrier2").empty();
+            $("#Mars1").empty(); $("#Mars2").empty(); $("#Mars3").empty();
+            $("#Avril1").empty(); $("#Avril2").empty(); $("#Avril3").empty();
+            $("#Mai1").empty(); $("#Mai2").empty(); $("#Mai3").empty();
+            $("#Juin1").empty(); $("#Juin2").empty(); $("#Juin3").empty();
+            $("#Juillet1").empty(); $("#Juillet2").empty(); $("#Juillet3").empty();
+            $("#Aout1").empty(); $("#Aout2").empty(); $("#Aout3").empty();
+            $("#Septembre1").empty(); $("#Septembre2").empty(); $("#Septembre3").empty();
+            $("#Octobre1").empty(); $("#Octobre2").empty(); $("#Octobre3").empty();
+            $("#Novembre1").empty(); $("#Novembre2").empty(); $("#Novembre3").empty();
+            $("#Decembre1").empty(); $("#Decembre2").empty(); $("#Decembre3").empty();
+            //____________________________priorite par mois_____________________________
+            $("#janvier1").empty(); $("#janvier2").empty(); $("#janvier3").empty();
+            $("#fevrier1").empty(); $("#fevrier2").empty(); $("#fevrier3").empty();
+            $("#mars1").empty(); $("#mars2").empty(); $("#mars3").empty();
+            $("#avril1").empty(); $("#avril2").empty(); $("#avril3").empty();
+            $("#mai1").empty(); $("#mai2").empty(); $("#mai3").empty();
+            $("#juin1").empty(); $("#juin2").empty(); $("#juin3").empty();
+            $("#juillet1").empty(); $("#juillet2").empty(); $("#juillet3").empty();
+            $("#aout1").empty(); $("#aout2").empty(); $("#aout3").empty();
+            $("#septembre1").empty(); $("#septembre2").empty(); $("#septembre3").empty();
+            $("#octobre1").empty(); $("#octobre2").empty(); $("#octobre3").empty();
+            $("#novembre1").empty(); $("#novembre2").empty(); $("#novembre3").empty();
+            $("#decembre1").empty(); $("#decembre2").empty(); $("#decembre3").empty();
+            //____________________________priorite par mois_____________________________
+            
+            $.ajax({
+                url: "@Url.Action("GetCommentaire", "VoulemetrieIncident")",
+                data: "",
+            type: "GET",
+            dataType: "Json",
+            success: function (data) {
+
+                for (i = 0; i < data.length; i++)
+                {
+                    $("#Commantaire").append(data[i].commentaire);
+                    console.log(data[0].commentaire);
+                }
+               
+            },
+            error: function()
+            {
+                $("#Commantaire").text("Ajouter une Commentaire");
+            },
+            });
+            //Fevrie function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityfev", "VoulemetrieIncident")",
+                data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+                typ: "POST",
+                datatype: "Json",
+                success: function (data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        for (var j = 0; j < tab.length; j++) {
+
+                            if (data[i].m == j) {
+                                if (data[i].entre != "") { $("#Fevrier1").text(data[i].entre); } else { $("#Fevrier1").text("0"); }
+                                if (data[i].sortie != "") { $("#Fevrier2").text(data[i].sortie); } else { $("#Fevrier2").text("0"); }
+                                if (data[i].stock !="") { $("#Fevrier3").text(data[i].stock); } else { $("#Fevrier3").text("0"); }
+                               
+                                entre2=data[i].entre;
+                                sortie2=data[i].sortie;
+                                stock2 = data[i].stock;
+                              
+                            }
+                        }
+                    }
+           
+                  
+
+                },
+                async: false
+            });
+       
+
+        //Janvier function
+
+        $.ajax({
+             
+            url: "@Url.Action("GetCountPriorityJanv", "VoulemetrieIncident")",
+             data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+        typ: "POST",
+        datatype: "Json",
+        success: function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < tab.length; j++) {
+            
+
+                    if (data[i].m == j) {
+                        if (data[i].entre != "") { $("#Janvier1").text(data[i].entre); } else { $("#Janvier1").text("0"); }
+                        if (data[i].sortie != "") { $("#Janvier2").text(data[i].sortie); } else { $("#Janvier2").text("0"); }
+                        if (data[i].stock != "") { $("#Janvier3").text(data[i].stock); } else { $("#Janvier3").text("0"); }
+                               
+                        entre1=data[i].entre;
+                        sortie1=data[i].sortie;
+                        stock1=data[i].stock;
+                    }
+                }
+            }
+           
+                  
+
+        },
+        async: false
+    });
+        //Mars Function
+        $.ajax({
+             
+            url: "@Url.Action("GetCountPriorityMars", "VoulemetrieIncident")",
+             data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+        typ: "POST",
+        datatype: "Json",
+        success: function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < tab.length; j++) {
+                  
+                    if (data[i].m == j) {
+                        if (data[i].entre != "") { $("#Mars1").text(data[i].entre); } else { $("#Mars1").text("0"); }
+                        if (data[i].sortie != "") { $("#Mars2").text(data[i].sortie); } else { $("#Mars2").text("0"); }
+                        if (data[i].stock != "") { $("#Mars3").text(data[i].stock); } else { $("#Mars3").text("0"); }
+                               
+                        entre3=data[i].entre;
+                        sortie3=data[i].sortie;
+                        stock3=data[i].stock;
+                    }
+                }
+            }
+           
+                  
+
+        },
+        async: false
+        });
+            //Avril Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityAvril", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+                  
+                      
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Avril1").text(data[i].entre); } else { $("#Avril1").text("0"); }
+                            if (data[i].sortie != "") { $("#Avril2").text(data[i].sortie); } else { $("#Avril2").text("0"); }
+                            if (data[i].stock != "") { $("#Avril3").text(data[i].stock); } else { $("#Avril3").text("0"); }
+                            entre4=data[i].entre;
+                            sortie4=data[i].sortie;
+                            stock4=data[i].stock;
+                               
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+            //Mai Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityMai", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Mai1").text(data[i].entre); } else { $("#Mai1").text("0"); }
+                            if (data[i].sortie != "") { $("#Mai2").text(data[i].sortie); } else { $("#Mai2").text("0"); }
+                            if (data[i].stock != "") { $("#Mai3").text(data[i].stock); } else { $("#Mai3").text("0"); }
+                               
+                            entre5=data[i].entre;
+                            sortie5=data[i].sortie;
+                            stock5=data[i].stock;
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+            //Juin Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityJuin", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+                 
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Juin1").text(data[i].entre); } else { $("#Juin1").text("0"); }
+                            if (data[i].sortie != "") { $("#Juin2").text(data[i].sortie); } else { $("#Juin2").text("0"); }
+                            if (data[i].stock != "") { $("#Juin3").text(data[i].stock); } else { $("#Juin3").text("0"); }
+                               
+                            entre6=data[i].entre;
+                            sortie6=data[i].sortie;
+                            stock6=data[i].stock;
+                               
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+        });
+            //Juillet Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityJuillet", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Juillet1").text(data[i].entre); } else { $("#Juillet1").text("0"); }
+                            if (data[i].sortie != "") { $("#Juillet2").text(data[i].sortie); } else { $("#Juillet2").text("0"); }
+                            if (data[i].stock != "") { $("#MarJuillets3").text(data[i].stock); } else { $("#Juillet3").text("0"); }
+                               
+                            entre7=data[i].entre;
+                            sortie7=data[i].sortie;
+                            stock7=data[i].stock;
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+            //Aout Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityAout", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+
+                    
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Aout1").text(data[i].entre); } else { $("#Aout1").text("0"); }
+                            if (data[i].sortie != "") { $("#Aout2").text(data[i].sortie); } else { $("#Aout2").text("0"); }
+                            if (data[i].stock != "") { $("#Aout3").text(data[i].stock); } else { $("#Aout3").text("0"); }
+                               
+                            entre8=data[i].entre;
+                            sortie8=data[i].sortie;
+                            stock8=data[i].stock;
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+
+            //Septebmre Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPrioritySeptebmre", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Septembre1").text(data[i].entre); } else { $("#Septembre1").text("0"); }
+                            if (data[i].sortie != "") { $("#Septembre2").text(data[i].sortie); } else { $("#Mars2").text("0"); }
+                            if (data[i].stock != "") { $("#Septembre3").text(data[i].stock); } else { $("#Septembre3").text("0"); }
+                               
+                            entre9=data[i].entre;
+                            sortie9=data[i].sortie;
+                            stock9=data[i].stock;
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+
+            //Octobre Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityOctobre", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Octobre1").text(data[i].entre); } else { $("#Octobre1").text("0"); }
+                            if (data[i].sortie != "") { $("#Octobre2").text(data[i].sortie); } else { $("#Octobre2").text("0"); }
+                            if (data[i].stock != "") { $("#Octobre3").text(data[i].stock); } else { $("#Octobre3").text("0"); }
+                               
+                            entre10=data[i].entre;
+                            sortie10=data[i].sortie;
+                            stock10=data[i].stock;
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+
+            //November Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityNovember", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Novembre1").text(data[i].entre); } else { $("#Novembre1").text("0"); }
+                            if (data[i].sortie != "") { $("#Novembre2").text(data[i].sortie); } else { $("#Novembre2").text("0"); }
+                            if (data[i].stock != "") { $("#Novembre3").text(data[i].stock); } else { $("#Novembre3").text("0"); }
+                        
+                            entre11=data[i].entre;
+                            sortie11=data[i].sortie;
+                            stock11=data[i].stock;
+                               
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+            //Decembre Function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityDecembre", "VoulemetrieIncident")",
+                 data: { y: $('#DataYear').val(), idp: $('#Projet').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+                  
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#Decembre1").text(data[i].entre); } else { $("#Decembre1").text("0"); }
+                            if (data[i].sortie != "") { $("#Decembre2").text(data[i].sortie); } else { $("#Decembre2").text("0"); }
+                            if (data[i].stock != "") { $("#Decembre2").text(data[i].stock); } else { $("#Decembre2").text("0"); }
+                               
+                            entre12=data[i].entre;
+                            sortie12=data[i].sortie;
+                            stock12=data[i].stock;
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+            });
+
+            $('#container').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                colors: [
+                          '#0F0090',
+                          '#F70000',
+                          '#4974AB',
+                ],
+                title: {
+                    text: 'Volumétrie globale <small>(toutes priorités)</small>'
+                },
+                subtitle: {
+                    text: 'Statistic TMA'
+                },
+                xAxis: {
+                    categories:["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août" ,"Septembre","Octobre","Novembre","Décembre"],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Statistic du Nombre de Priorité'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:12px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 1
+                    }
+                },
+                series: [{
+                                //sortie2
+                                //stock2
+                    name: 'Entrée',
+                    data: [entre1,entre2, entre3,entre4, entre5,entre6, entre7, entre8,entre9, entre10, entre11, entre12]
+
+                },  {
+                    name: 'Sortie',
+                    data: [sortie1, sortie2,sortie3,sortie4,sortie5, sortie6,sortie7, sortie8,sortie9,sortie10, sortie11,sortie12]
+
+                }, {
+                    name: 'Stock',
+                    data: [stock1,stock2,stock3,stock4,stock5,stock6,stock7,stock8,stock9,stock10,stock11,stock12]
+
+                }]
+            });
+        });
+        //change les mois par priorité__________________________________________________________
+
+    
+        $('#priorite').change(function () {
+            
+            var Entre1 = 0, Entre2 = 0, Entre3 = 0, Entre4 = 0, Entre5 = 0, Entre6 = 0, Entre7 = 0, Entre8 = 0, Entre9 = 0, Entre10 = 0, Entre11 = 0, Entre12 = 0;
+            var Sortie1 = 0, Sortie2 = 0, Sortie3 = 0, Sortie4 = 0, Sortie5 = 0, Sortie6 = 0, Sortie7 = 0, Sortie8 = 0, Sortie9 = 0, Sortie10 = 0, Sortie11 = 0, Sortie12 = 0;
+            var Stock1 = 0, Stock2 = 0, Stock3 = 0, Stock4 = 0, Stock5 = 0, Stock6 = 0, Stock7 = 0, Stock8 = 0, Stock9 = 0, Stock10 = 0, Stock11 = 0, Stock12 = 0;
+            $("#janvier1").empty(); $("#janvier2").empty(); $("#janvier3").empty();
+            $("#fevrier1").empty(); $("#fevrier2").empty(); $("#fevrier3").empty();
+            $("#mars1").empty(); $("#mars2").empty(); $("#mars3").empty();
+            $("#avril1").empty(); $("#avril2").empty(); $("#avril3").empty();
+            $("#mai1").empty(); $("#mai2").empty(); $("#mai3").empty();
+            $("#juin1").empty(); $("#juin2").empty(); $("#juin3").empty();
+            $("#juillet1").empty(); $("#juillet2").empty(); $("#juillet3").empty();
+            $("#aout1").empty(); $("#aout2").empty(); $("#aout3").empty();
+            $("#septembre1").empty(); $("#septembre2").empty(); $("#septembre3").empty();
+            $("#octobre1").empty(); $("#octobre2").empty(); $("#octobre3").empty();
+            $("#novembre1").empty(); $("#novembre2").empty(); $("#novembre3").empty();
+            $("#decembre1").empty(); $("#decembre2").empty(); $("#decembre3").empty();
+
+            //Fevrie function
+            $.ajax({
+             
+                url: "@Url.Action("GetCountPriorityfevP", "VoulemetrieIncident")",
+                data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+            typ: "POST",
+            datatype: "Json",
+            success: function (data) {
+           
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < tab.length; j++) {
+
+                        if (data[i].m == j) {
+                            if (data[i].entre != "") { $("#fevrier1").text(data[i].entre); } else { $("#fevrier1").text("0"); }
+                            if (data[i].sortie != "") { $("#fevrier2").text(data[i].sortie); } else { $("#fevrier2").text("0"); }
+                            if (data[i].stock !="") { $("#fevrier3").text(data[i].stock); } else { $("#fevrier3").text("0"); }
+                               
+
+                            Entre2=data[i].entre;
+                            Sortie2=data[i].sortie;
+                            Stock2 = data[i].stock;
+                            console.log(Entre2);
+                            console.log(Sortie2);
+                            console.log(Stock2);
+                        }
+                    }
+                }
+           
+                  
+
+            },
+            async: false
+        });
+       
+
+        //Janvier function
+
+        $.ajax({
+             
+            url: "@Url.Action("GetCountPriorityJanvP", "VoulemetrieIncident")",
+            data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+        typ: "POST",
+        datatype: "Json",
+        success: function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < tab.length; j++) {
+            
+
+                    if (data[i].m == j) {
+                        if (data[i].entre != "") { $("#janvier1").text(data[i].entre); } else { $("#janvier1").text("0"); }
+                        if (data[i].sortie != "") { $("#janvier2").text(data[i].sortie); } else { $("#janvier2").text("0"); }
+                        if (data[i].stock != "") { $("#janvier3").text(data[i].stock); } else { $("#janvier3").text("0"); }
+                               
+                        Entre1=data[i].entre;
+                        Sortie1=data[i].sortie;
+                        Stock1=data[i].stock;
+                    }
+                }
+            }
+           
+                  
+
+        },
+        async: false
+    });
+    //Mars Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityMarsP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+                  
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#mars1").text(data[i].entre); } else { $("#mars1").text("0"); }
+                    if (data[i].sortie != "") { $("#mars2").text(data[i].sortie); } else { $("#mars2").text("0"); }
+                    if (data[i].stock != "") { $("#mars3").text(data[i].stock); } else { $("#mars3").text("0"); }
+                               
+                    Entre3=data[i].entre;
+                    Sortie3=data[i].sortie;
+                    Stock3=data[i].stock;
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+    //Avril Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityAvrilP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+                  
+                      
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#avril1").text(data[i].entre); } else { $("#avril1").text("0"); }
+                    if (data[i].sortie != "") { $("#avril2").text(data[i].sortie); } else { $("#avril2").text("0"); }
+                    if (data[i].stock != "") { $("#avril3").text(data[i].stock); } else { $("#avril3").text("0"); }
+                    Entre4=data[i].entre;
+                    Sortie4=data[i].sortie;
+                    Stock4=data[i].stock;
+                               
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+    //Mai Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityMaiP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#mai1").text(data[i].entre); } else { $("#mai1").text("0"); }
+                    if (data[i].sortie != "") { $("#mai2").text(data[i].sortie); } else { $("#mai2").text("0"); }
+                    if (data[i].stock != "") { $("#mai3").text(data[i].stock); } else { $("#mai3").text("0"); }
+                               
+                    Entre5=data[i].entre;
+                    Sortie5=data[i].sortie;
+                    Stock5=data[i].stock;
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+    //Juin Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityJuinP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+                 
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#juin1").text(data[i].entre); } else { $("#juin1").text("0"); }
+                    if (data[i].sortie != "") { $("#juin2").text(data[i].sortie); } else { $("#juin2").text("0"); }
+                    if (data[i].stock != "") { $("#juin3").text(data[i].stock); } else { $("#juin3").text("0"); }
+                               
+                    Entre6=data[i].entre;
+                    Sortie6=data[i].sortie;
+                    Stock6=data[i].stock;
+                               
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+    //Juillet Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityJuilletP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#juillet1").text(data[i].entre); } else { $("#juillet1").text("0"); }
+                    if (data[i].sortie != "") { $("#juillet2").text(data[i].sortie); } else { $("#juillet2").text("0"); }
+                    if (data[i].stock != "") { $("#juillets3").text(data[i].stock); } else { $("#juillet3").text("0"); }
+                               
+                    Entre7=data[i].entre;
+                    Sortie7=data[i].sortie;
+                    Stock7=data[i].stock;
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+    //Aout Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityAoutP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+
+                    
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#aout1").text(data[i].entre); } else { $("#aout1").text("0"); }
+                    if (data[i].sortie != "") { $("#aout2").text(data[i].sortie); } else { $("#aout2").text("0"); }
+                    if (data[i].stock != "") { $("#aout3").text(data[i].stock); } else { $("#aout3").text("0"); }
+                               
+                    Entre8=data[i].entre;
+                    Sortie8=data[i].sortie;
+                    Stock8=data[i].stock;
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+
+    //Septebmre Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPrioritySeptebmreP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#septembre1").text(data[i].entre); } else { $("#septembre1").text("0"); }
+                    if (data[i].sortie != "") { $("#septembre2").text(data[i].sortie); } else { $("#sars2").text("0"); }
+                    if (data[i].stock != "") { $("#septembre3").text(data[i].stock); } else { $("#septembre3").text("0"); }
+                               
+                    Entre9=data[i].entre;
+                    Sortie9=data[i].sortie;
+                    Stock9=data[i].stock;
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+
+    //Octobre Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityOctobreP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#octobre1").text(data[i].entre); } else { $("#octobre1").text("0"); }
+                    if (data[i].sortie != "") { $("#octobre2").text(data[i].sortie); } else { $("#octobre2").text("0"); }
+                    if (data[i].stock != "") { $("#octobre3").text(data[i].stock); } else { $("#octobre3").text("0"); }
+                               
+                    Entre10=data[i].entre;
+                    Sortie10=data[i].sortie;
+                    Stock10=data[i].stock;
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+
+    //November Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityNovemberP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#novembre1").text(data[i].entre); } else { $("#novembre1").text("0"); }
+                    if (data[i].sortie != "") { $("#novembre2").text(data[i].sortie); } else { $("#novembre2").text("0"); }
+                    if (data[i].stock != "") { $("#novembre3").text(data[i].stock); } else { $("#novembre3").text("0"); }
+                        
+                    Entre11=data[i].entre;
+                    Sortie11=data[i].sortie;
+                    Stock11 = data[i].stock;
+                 
+                               
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+    //Decembre Function
+    $.ajax({
+             
+        url: "@Url.Action("GetCountPriorityDecembreP", "VoulemetrieIncident")",
+        data: { y: $('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val() },
+    typ: "POST",
+        datatype: "Json",
+    success: function (data) {
+       
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < tab.length; j++) {
+                  
+                if (data[i].m == j) {
+                    if (data[i].entre != "") { $("#decembre1").text(data[i].entre); } else { $("#decembre1").text("0"); }
+                    if (data[i].sortie != "") { $("#decembre2").text(data[i].sortie); } else { $("#decembre2").text("0"); }
+                    if (data[i].stock != "") { $("#decembre2").text(data[i].stock); } else { $("#decembre2").text("0"); }
+                               
+                    Entre12=data[i].entre;
+                    Sortie12=data[i].sortie;
+                    Stock12 = data[i].stock;
+                    //console.log(tab[i].m);
+                    //console.log(data[i].entre);
+                    //console.log(data[i].sortie);
+                    //console.log(data[i].stock);
+                }
+            }
+        }
+           
+                  
+
+    },
+    async: false
+    });
+
+    $('#container2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        colors: [
+                  '#0F0090',
+                  '#F70000',
+                  '#4974AB',
+        ],
+        title: {
+            text: 'Volumétrie globale <small>(toutes priorités)</small>'
+        },
+        subtitle: {
+            text: 'Statistic TMA'
+        },
+        xAxis: {
+            categories:["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août" ,"Septembre","Octobre","Novembre","Décembre"],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Statistic'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:12px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 1
+            }
+        },
+        series: [{
+            //sortie2
+            //stock2
+            name: 'Entrée',
+            data: [Entre1,Entre2, Entre3,Entre4, Entre5,Entre6, Entre7, Entre8,Entre9, Entre10, Entre11, Entre12]
+
+        },  {
+            name: 'Sortie',
+            data: [Sortie1, Sortie2,Sortie3,Sortie4,Sortie5, Sortie6,Sortie7, Sortie8,Sortie9,Sortie10, Sortie11,Sortie12]
+
+        }, {
+            name: 'Stock',
+            data: [Stock1,Stock2,Stock3,Stock4,Stock5,Stock6,Stock7,Stock8,Stock9,Stock10,Stock11,Stock12]
+
+        }]
+    });
+    });
+    });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#enregistre').click(function () {
+
+                var comment = $('#Commantaire').val();
+                SendComment(comment);
+            });
+
+        });
+
+    function SendComment(comment) {
+
+        // 
+
+        $.ajax({
+
+            url: "@Url.Action("UpdateComment", "VoulemetrieIncident")",
+            data: { 'comment': comment },
+        type: "POST",
+        dataType: 'json',
+        success: function (response) {
+
+            alert("enregistré avec succées!");
+        },
+
+        });
+    }
+
+</script>
+
+<script>
+    function desactiver() {
+        document.form1.Commantaire.disabled = false;
+    }
+    function desactiverPriorite() {
+        document.form2.priorite.disabled = false;
+    }
+
+
+</script>
+
+
+
+
+

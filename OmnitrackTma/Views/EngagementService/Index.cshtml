@@ -1,0 +1,978 @@
+﻿@model OmnitrackTma.Models.mantis_bug_table
+
+
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>
+                                    Engagement de Services (SLA)
+                                 <br />
+                                        
+                                    <br />
+                                 
+                                  
+                                </h3>
+                            </div>
+
+                          
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Délai Moyen de résolution des incidents</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <br />
+                                        <form class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"> Selectionnez le Projet</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    @Html.DropDownList("Projet", new SelectList(ViewBag.projet, "id", "name"), "Selectionez Un Projet", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"> Selectionnez l'Année</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                          @Html.DropDownList("DataYear", new SelectList(string.Empty, "value", "Text"), new{@class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"> select Priorité *</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <select class="form-control" id="priorite">
+                                                        <option>Priorité</option>
+                                                        <option value="40">Priorité Haute</option>
+                                                        <option value="30">Priorité Moyenne</option>
+                                                        <option value="20">Priorité Basse</option>
+                                                        <option value="10">Priorité Non Définie</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Initial de correction d'incident</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                <ul class="dropdown-menu" role="menu"></ul>
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <br />
+                                        <table class="table table-bordered">
+                                            <tr style="border-style: dotted;">
+                                                <th class="tdb" style="background-color: #73879C;color:#FFFFFF">Délais d'engagement initial de correction d'incident</th>
+                                                <th> 2:00 </th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+
+                                    <div class="x_content">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th class="tdb">Delai Moyen en Heur</th>
+                                                    <th class="tdb"> Respects du Délais</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Janvier</th>
+                                                    <td style="color:#000000" id="janvier1"></td>
+                                                    <td style="color:#000000" id="janvier2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Février</th>
+                                                    <td style="color:#000000" id="fevrier1"></td>
+                                                    <td style="color:#000000" id="fevrier2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Mars</th>
+                                                    <td style="color:#000000" id="mars1"></td>
+                                                    <td style="color:#000000" id="mars2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Avril</th>
+                                                    <td style="color:#000000" id="avril1"></td>
+                                                    <td style="color:#000000" id="avril2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Mai</th>
+                                                    <td style="color:#000000" id="mai1"></td>
+                                                    <td style="color:#000000" id="mai2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Juin</th>
+                                                    <td style="color:#000000" id="juin1"></td>
+                                                    <td style="color:#000000" id="juin2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Juillet</th>
+                                                    <td style="color:#000000" id="juillet1"></td>
+                                                    <td style="color:#000000" id="juillet2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Août</th>
+                                                    <td style="color:#000000" id="aout1"></td>
+                                                    <td style="color:#000000" id="aout2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Septembre</th>
+                                                    <td style="color:#000000" id="septebmre1"></td>
+                                                    <td style="color:#000000" id="septebmre2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Octobre</th>
+                                                    <td style="color:#000000" id="octobre1"></td>
+                                                    <td style="color:#000000" id="octobre2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Novembre</th>
+                                                    <td style="color:#000000" id="november1"></td>
+                                                    <td style="color:#000000" id="november2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Décembre</th>
+                                                    <td style="color:#000000" id="decembre1"></td>
+                                                    <td style="color:#000000" id="decembre2"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Toute l'Année</th>
+                                                    <td style="color:#000000;font-weight:bold" id="total1"></td>
+                                                    <td style="color:#000000;font-weight:bold" id ="total2"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Line graph<small>Sessions</small></h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                    <i class="fa fa-wrench"></i>
+                                                </a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        @*<canvas id="canvas0001"></canvas>*@
+                                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="width: 1100px;">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Commontaire le CP</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+
+                                        <form class="form-horizontal form-label-left" novalidate>
+
+                                            <fieldset>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                                                        Commantaire<span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <textarea id="textarea" required="required" name="textarea" class="form-control col-md-7 col-xs-12"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                        <button id="send" type="submit" class="btn btn-success">Modifier</button>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Voulumétrie des incidents de :</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                    <i class="fa fa-wrench"></i>
+                                                </a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <br />
+                                        <form class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"> select Priorité *</label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <select class="form-control">
+                                                        <option>Priorité</option>
+                                                        <option>Haute</option>
+                                                        <option>Moyenne</option>
+                                                        <option>Basse</option>
+                                                        <option>Non Définie</option>
+
+
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Initial de prise en compte d'incident</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                <ul class="dropdown-menu" role="menu"></ul>
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <br />
+                                        <table class="table table-bordered">
+                                            <tr style="border-style: dotted;">
+                                                <th class="tdb" style="background-color: #73879C;color:#FFFFFF">Délai d'engagement initial de prise en compte d'incident</th>
+                                                <th> 2:00 </th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+
+                                    <div class="x_content">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th class="tdb">Delai Moyen en Heur</th>
+                                                    <th class="tdb"> Respects du Délais</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Janvier</th>
+                                                    <td style="color:#000000">80</td>
+                                                    <td style="color:#000000">17</td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Février</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Mars</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000"> 0</td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Avril</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Mai</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Juin</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Juillet</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Août</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Septembre</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                  
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Octobre</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Novembre</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                 
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Décembre</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+                                                  
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tdb">Toute l'Année</th>
+                                                    <td style="color:#000000">0</td>
+                                                    <td style="color:#000000">0</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        Nombre d'incidents de priorité 1 reçus, en stock et terminés
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <canvas id="canvas0002"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="width: 1100px;">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Commontaire le CP</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+
+                                        <form class="form-horizontal form-label-left" novalidate>
+
+                                            <fieldset>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                                                        Commantaire<span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <textarea id="textarea" required="required" name="textarea" class="form-control col-md-7 col-xs-12"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                        <button id="send" type="submit" class="btn btn-success">Modifier</button>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- footer content -->
+                        <footer>
+                            <div class="">
+                                <p class="pull-right">
+                                    TMA. |
+                                    <span class="lead"> <i class="fa fa-paw"></i> TDB!</span>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </footer>
+                        <!-- /footer content -->
+
+                    </div>
+                    <!-- /page content -->
+              
+
+            @*<script>
+        var randomScalingFactor = function () {
+            return Math.round(Math.random() * 100)
+        };
+
+
+
+        var lineChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(38, 185, 154, 0.31)", //rgba(220,220,220,0.2)
+                    strokeColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
+                    pointColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [31, 74, 6, 39, 20, 85, 7]
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(3, 88, 106, 0.3)", //rgba(151,187,205,0.2)
+                    strokeColor: "rgba(3, 88, 106, 0.70)", //rgba(151,187,205,1)
+                    pointColor: "rgba(3, 88, 106, 0.70)", //rgba(151,187,205,1)
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: [82, 23, 66, 9, 99, 4, 2]
+                }
+            ]
+
+        }
+
+        $(document).ready(function () {
+            new Chart(document.getElementById("canvas0001").getContext("2d")).Line(lineChartData, {
+                responsive: true,
+                tooltipFillColor: "rgba(51, 51, 51, 0.55)"
+            });
+        });
+
+        var sharePiePolorDoughnutData = [
+            {
+                value: 120,
+                color: "#455C73",
+                highlight: "#34495E",
+                label: "Dark Grey"
+            },
+            {
+                value: 50,
+                color: "#9B59B6",
+                highlight: "#B370CF",
+                label: "Purple Color"
+            },
+            {
+                value: 150,
+                color: "#BDC3C7",
+                highlight: "#CFD4D8",
+                label: "Gray Color"
+            },
+            {
+                value: 180,
+                color: "#26B99A",
+                highlight: "#36CAAB",
+                label: "Green Color"
+            },
+            {
+                value: 100,
+                color: "#3498DB",
+                highlight: "#49A9EA",
+                label: "Blue Color"
+            }
+
+        ];
+        var lineChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(38, 185, 154, 0.31)", //rgba(220,220,220,0.2)
+                    strokeColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
+                    pointColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [31, 74, 6, 39, 20, 85, 7]
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(3, 88, 106, 0.3)", //rgba(151,187,205,0.2)
+                    strokeColor: "rgba(3, 88, 106, 0.70)", //rgba(151,187,205,1)
+                    pointColor: "rgba(3, 88, 106, 0.70)", //rgba(151,187,205,1)
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: [82, 23, 66, 9, 99, 4, 2]
+                }
+            ]
+
+        }
+
+        $(document).ready(function () {
+            new Chart(document.getElementById("canvas0002").getContext("2d")).Line(lineChartData, {
+                responsive: true,
+                tooltipFillColor: "rgba(51, 51, 51, 0.55)"
+            });
+        });
+
+        var sharePiePolorDoughnutData = [
+            {
+                value: 120,
+                color: "#455C73",
+                highlight: "#34495E",
+                label: "Dark Grey"
+            },
+            {
+                value: 50,
+                color: "#9B59B6",
+                highlight: "#B370CF",
+                label: "Purple Color"
+            },
+            {
+                value: 150,
+                color: "#BDC3C7",
+                highlight: "#CFD4D8",
+                label: "Gray Color"
+            },
+            {
+                value: 180,
+                color: "#26B99A",
+                highlight: "#36CAAB",
+                label: "Green Color"
+            },
+            {
+                value: 100,
+                color: "#3498DB",
+                highlight: "#49A9EA",
+                label: "Blue Color"
+            }
+
+        ];
+
+
+
+
+    </script>*@
+
+<script>
+
+    $(document).ready(function () {
+   
+        var mois1, mois2, mois3, mois4, mois5, mois6, mois7, mois8, mois9, mois10, mois11, mois12;
+       
+        $("#Projet").change(function () {
+            $("#janvier1").empty();
+            $("#fevrier1").empty();
+            $("#mars1").empty();
+            $("#avril1").empty();
+            $("#mai1").empty();
+            $("#juin1").empty();
+            $("#juillet1").empty();
+            $("#aout1").empty();
+            $("#septebmre1").empty();
+            $("#octobre1").empty();
+            $("#november1").empty();
+            $("#decembre1").empty();
+            $("#total1").empty();
+            //________________________________//
+            $("#janvier2").empty();
+            $("#fevrier2").empty();
+            $("#mars2").empty();
+            $("#avril2").empty();
+            $("#mai2").empty();
+            $("#juin2").empty();
+            $("#juillet2").empty();
+            $("#aout2").empty();
+            $("#septebmre2").empty();
+            $("#octobre2").empty();
+            $("#november2").empty();
+            $("#decembre2").empty();
+            $("#total2").empty();
+            //__________________change color____//
+
+            $("#janvier2").css("background-color", "#fff");
+            $("#fevrier2").css("background-color", "#fff")
+            $("#mars2").css("background-color", "#fff")
+            $("#avril2").css("background-color", "#fff")
+            $("#mai2").css("background-color", "#fff")
+            $("#juin2").css("background-color", "#fff")
+            $("#juillet2").css("background-color", "#fff")
+            $("#aout2").css("background-color", "#fff")
+            $("#septebmre2").css("background-color", "#fff")
+            $("#octobre2").css("background-color", "#fff")
+            $("#november2").css("background-color", "#fff")
+            $("#decembre2").css("background-color", "#fff")
+            $("#total2").css("background-color", "#fff");
+         
+            $("#DataYear").empty();
+           
+            $.ajax({
+                url: "@Url.Action("GetYearbyProjectE", "EngagementService")",
+
+                data: { p: $('#Projet').val() },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+
+                    $('#DataYear').append("<option>Selectionnez Année</option>");
+                    for (var i = 0; i < data.length; i++) {
+
+
+                        $('#DataYear').append('<option value="' + data[i].Year + '">' + data[i].Year + '</option>');
+
+                    }
+                },
+
+            });
+        });
+        $("#DataYear").change(function () {
+            $("#janvier1").empty();
+            $("#fevrier1").empty();
+            $("#mars1").empty();
+            $("#avril1").empty();
+            $("#mai1").empty();
+            $("#juin1").empty();
+            $("#juillet1").empty();
+            $("#aout1").empty();
+            $("#septebmre1").empty();
+            $("#octobre1").empty();
+            $("#november1").empty();
+            $("#decembre1").empty();
+            $("#total1").empty();
+            //________________________________//
+            $("#janvier2").empty();
+            $("#fevrier2").empty();
+            $("#mars2").empty();
+            $("#avril2").empty();
+            $("#mai2").empty();
+            $("#juin2").empty();
+            $("#juillet2").empty();
+            $("#aout2").empty();
+            $("#septebmre2").empty();
+            $("#octobre2").empty();
+            $("#november2").empty();
+            $("#decembre2").empty();
+            $("#total2").empty();
+            //__________________change color____//
+
+            $("#janvier2").css("background-color", "#fff");
+            $("#fevrier2").css("background-color", "#fff")
+            $("#mars2").css("background-color", "#fff")
+            $("#avril2").css("background-color", "#fff")
+            $("#mai2").css("background-color", "#fff")
+            $("#juin2").css("background-color", "#fff")
+            $("#juillet2").css("background-color", "#fff")
+            $("#aout2").css("background-color", "#fff")
+            $("#septebmre2").css("background-color", "#fff")
+            $("#octobre2").css("background-color", "#fff")
+            $("#november2").css("background-color", "#fff")
+            $("#decembre2").css("background-color", "#fff")
+            $("#total2").css("background-color", "#fff");
+         
+          
+          
+    });
+
+
+        $("#priorite").change(function () {
+            var m1 = 0, m2 = 0, m3 = 0, m4 = 0, m5 = 0, m6 = 0, m7 = 0, m8 = 0, m9 = 0, m10 = 0, m11 = 0, m12 = 0, hours1, minutes1;
+            $.ajax({
+                url: "@Url.Action("GetDataDelai", "EngagementService")",
+              data: { y:$('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val(), },
+            type: "POST",
+            dataType: "Json",
+
+            success: function (data) {
+               
+
+             
+                
+                $("#janvier1").text(data[0][1].slice(-12, -3));
+                $("#fevrier1").text(data[1][1].slice(-12,-3));
+                $("#mars1").text(data[2][1].slice(-12, -3));
+                $("#avril1").text(data[3][1].slice(-12, -3));
+                $("#mai1").text(data[4][1].slice(-12, -3));
+                $("#juin1").text(data[5][1].slice(-12, -3));
+                $("#juillet1").text(data[6][1].slice(-12, -3));
+                $("#aout1").text(data[7][1].slice(-12, -3));
+                $("#septebmre1").text(data[8][1].slice(-12, -3));
+                $("#octobre1").text(data[9][1].slice(-12, -3));
+                $("#november1").text(data[10][1].slice(-12, -3));
+                $("#decembre1").text(data[11][1].slice(-12, -3));
+                     m1 = data[0][1];
+                     m2 = (data[1][1]).toString();
+                     m3 = data[2][1];
+                     m4 = data[3][1];
+                     m5 = data[4][1];
+                     m6 = data[5][1];
+                     m7 = data[6][1];
+                     m8 = data[7][1];
+                     m9 = data[8][1];
+                     m10 = data[9][1];
+                     m11 = data[10][1];
+                     m12 = data[11][1];
+                     //var mm2H = m2.slice(-12, -5);//partie heur
+                     //var mm2M = m2.slice(-5);//partie minute
+                     //console.log(mm2H);
+                     //console.log(mm2M);
+                //console.log(mm2H + mm2M);
+                     //heuresplit = m2.split();
+                //console.log(heuresplit);
+                     hours1 = (m2 / 60).toFixed(2);
+                console.log(hours1);
+
+                   
+            },
+            async: false
+            });
+
+            $.ajax({
+                url: "@Url.Action("GetDataPourcentage", "EngagementService")",
+                data: { y:$('#DataYear').val(), idp: $('#Projet').val(), priorite: $('#priorite').val(), },
+            type: "POST",
+            dataType: "Json",
+
+            success: function (data) {
+            
+
+               mois1 = ((data[0][1] * 100) / 120) - 100;
+                mois2 = ((data[1][1]*100)/120)-100;
+                mois3 = ((data[2][1] * 100) / 120) - 100;
+                mois4 = ((data[3][1] * 100) / 120) - 100;
+                mois5 = ((data[4][1] * 100) / 120) - 100;
+                mois6 = ((data[5][1] * 100) / 120) - 100;
+                mois7 = ((data[6][1] * 100) / 120) - 100;
+                mois8 = ((data[7][1] * 100) / 120) - 100;
+                mois9 = ((data[8][1] * 100) / 120) - 100;
+                mois10 = ((data[9][1] * 100) / 120) - 100;
+                mois11 = ((data[10][1] * 100) / 120) - 100;
+                mois12 = ((data[11][1] * 100) / 120) - 100;
+                //calculer pourcentgae de toute l'année
+                var TotalPourcentage = ((parseInt(data[1][1]) + parseInt(data[5][1]) + parseInt(data[6][1]) + parseInt(data[7][1]) + parseInt(data[8][1]) + parseInt(data[9][1]) + parseInt(data[10][1]) + parseInt(data[11][1])) / 12);
+                var TotalPourcentageTotal = ((TotalPourcentage * 100) / 120) - 100;
+                //___________________________calculé total delai d'heur
+                
+                var totalDelaiFloat = (parseInt(TotalPourcentage) / 60).toFixed(2);//0.32
+                var totalDelaiFloatInt = totalDelaiFloat.slice(-6, -3);//0
+                var totaldelai1 = totalDelaiFloat.slice(-2, 6);//32              
+                var totaldelai2Minute = ((parseInt(totaldelai1) * 60))//1920
+                var TotalToString = totaldelai2Minute.toString();//"1920"
+                var ToTalHeurDelai = TotalToString.substr(0, 2);//"19"
+                var ToTalDelai = (totalDelaiFloatInt + ":" + ToTalHeurDelai);
+             
+
+                     
+                 
+                if (mois1.toFixed(2) == -100) { $("#janvier2").text("0") } else { $("#janvier2").text(mois1.toFixed(2) + "%") };
+                if (mois2.toFixed(2) == -100) { $("#fevrier2").text("0") } else { $("#fevrier2").text(mois2.toFixed(2) + "%") };
+                if (mois3.toFixed(2) == -100) { $("#mars2").text("0") } else { $("#mars2").text(mois3.toFixed(2) + "%") };
+                if (mois4.toFixed(2) == -100) { $("#avril2").text("0") } else { $("#avril2").text(mois4.toFixed(2) + "%") };
+                if (mois5.toFixed(2) == -100) { $("#mai2").text("0") } else { $("#mai2").text(mois5.toFixed(2) + "%") };
+                if (mois6.toFixed(2) == -100) { $("#juin2").text("0") } else { $("#juin2").text(mois6.toFixed(2) + "%") };
+                if (mois7.toFixed(2) == -100) { $("#juillet2").text("0") } else { $("#juillet2").text(mois7.toFixed(2) + "%") };
+                if (mois8.toFixed(2) == -100) { $("#aout2").text("0") } else { $("#aout2").text(mois8.toFixed(2) + "%") };
+                if (mois9.toFixed(2) == -100) { $("#septebmre2").text("0") } else { $("#septebmre2").text(mois9.toFixed(2) + "%") };
+                if (mois10.toFixed(2) == -100) { $("#octobre2").text("0") } else { $("#octobre2").text(mois10.toFixed(2) + "%") };
+                if (mois11.toFixed(2) == -100) { $("#november2").text("0") } else { $("#november2").text(mois11.toFixed(2) + "%") };
+                if (mois12.toFixed(2) == -100) { $("#decembre2").text("0") } else { $("#decembre2").text(mois12.toFixed(2) + "%") };
+                if (TotalPourcentageTotal.toFixed(2) == -100) { $("#total2").text("0") } else { $("#total2").text(TotalPourcentageTotal.toFixed(2) + "%"); };
+                $("#total1").text(ToTalDelai);
+               
+                //__________________________________change color__________________________________________________________
+                if (mois1.toFixed(2) < 0) { $("#janvier2").css("background-color", "#B9121B") } else { $("#janvier2").css("background-color", "#ADCF4F") };
+                if (mois2.toFixed(2) < 0) { $("#fevrier2").css("background-color", "#B9121B") } else { $("#fevrier2").css("background-color", "#ADCF4F") };
+                if (mois3.toFixed(2) < 0) { $("#mars2").css("background-color", "#B9121B") } else { $("#mars2").css("background-color", "#ADCF4F") };
+                if (mois4.toFixed(2) < 0) { $("#avril2").css("background-color", "#B9121B") } else { $("#avril2").css("background-color", "#ADCF4F") };
+                if (mois5.toFixed(2) < 0) { $("#mai2").css("background-color", "#B9121B") } else { $("#mai2").css("background-color", "#ADCF4F") };
+                if (mois6.toFixed(2) < 0) { $("#juin2").css("background-color", "#B9121B") } else { $("#juin2").css("background-color", "#ADCF4F") };
+                if (mois7.toFixed(2) < 0) { $("#juillet2").css("background-color", "#B9121B") } else { $("#juillet2").css("background-color", "#ADCF4F") };
+                if (mois8.toFixed(2) < 0) { $("#aout2").css("background-color", "#B9121B") } else { $("#aout2").css("background-color", "#ADCF4F") };
+                if (mois9.toFixed(2) < 0) { $("#septebmre2").css("background-color", "#B9121B") } else { $("#septebmre2").css("background-color", "#ADCF4F") };
+                if (mois10.toFixed(2) < 0) { $("#octobre2").css("background-color", "#B9121B") } else { $("#octobre2").css("background-color", "#ADCF4F") };
+                if (mois11.toFixed(2) < 0) { $("#november2").css("background-color", "#B9121B") } else { $("#november2").css("background-color", "#ADCF4F") };
+                if (mois12.toFixed(2) < 0) { $("#decembre2").css("background-color", "#B9121B") } else { $("#decembre2").css("background-color", "#ADCF4F") };
+                $("#total2").css("background-color", "#B9121B");
+
+                   
+               
+
+            },
+            async: false
+            });
+
+            
+
+            $('#container').highcharts({
+                
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Monthly Average Temperature'
+                },
+                subtitle: {
+                    text: 'Source: WorldClimate.com'
+                },
+                xAxis: {
+                    categories: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+                    type: 'datetime',
+                   
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature (°C)'
+                    },
+                    
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [
+                    {
+                        name: 'Delai de Respect',
+                        // name: 'Tokyo',
+                    data: [parseFloat(m1), parseFloat((155 / 60).toFixed(2)), parseFloat(m3), parseFloat(m4), parseFloat(m5), parseFloat(m6), parseFloat(m7), parseFloat(m8), parseFloat(m9), parseFloat(m10), parseFloat(m11), parseFloat(m12)]
+                    },
+                    //data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+                                  
+                 ]
+            });
+
+        });
+       
+  
+      
+
+    });
+
+</script>
+

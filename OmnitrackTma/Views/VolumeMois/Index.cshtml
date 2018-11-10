@@ -1,0 +1,884 @@
+﻿@model IEnumerable<OmnitrackTma.Models.mantis_bug_table>
+
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>
+                Volume du mois
+                <small>
+                    < TDB >
+                 
+                </small>
+            </h3>
+        </div>
+
+
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+        <div class="col-md-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>choisissez le mois et l'année <small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Selectionnez Un Projet </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                @Html.DropDownList("Projet", new SelectList(ViewBag.projet, "id", "name"), "Selectionez Un Projet", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Selectionnez l'année </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                @Html.DropDownList("DataYear", new SelectList(string.Empty, "value", "Text"),new { @class = "form-control" })
+
+                                @*@Html.DropDownList("methodYear2", new SelectList(ViewBag.year, "a", "a"), "Selectonnez Le Mois",new { @class = "hidden" })*@
+                                @*<select class="form-control" id="DataYear">
+                                        <option>Année</option>
+
+                                        @foreach (var item in Model.Select(a=>a.last_updated.Year).Distinct())
+                                                    {
+                                            <option value="@item">@item</option>
+
+                                                    }
+                                    </select>*@
+
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Selectionnez Le Mois </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                @Html.DropDownList("txtSearch", new SelectList(string.Empty, "value", "Text"), new { @class = "form-control" })
+                                @*<select class="form-control">
+                                      <option></option>
+
+                                      @foreach (var item in Model.Select(i => i.last_updated.Year).Distinct())
+                                        {
+
+                                       <option>@item</option>
+
+                                          }
+
+                                          <option>@item.Year</option>
+                                      }
+
+
+                                    </select>*@
+
+                            </div>
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>En Stock</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+
+                                <th>Demandes en Stock </th>
+                                
+                                
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="EvoStock"><span>0</span></td>
+                            </tr>
+                            <tr>
+                                <td id="IncidStock"><span>0</span></td>
+                            </tr>
+                            <tr>
+                                <td id="AssistStock"><span>0</span></td>
+                            </tr>
+                            <tr>
+                                <td id="totaltraitEnStock">0<span></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <b>
+                        Nombre de demandes traitées ( réalisées ou abandonnées ) par type et par priorité
+                    </b>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+
+                    <!-- Demande traitées dans le mois de janviér ___________________________________-->
+
+                    <table class="table table-striped responsive-utilities jambo_table bulk_action">
+
+
+                        <thead>
+                            <tr>
+                                <th rowspan="2" style="background-color: #fff;"></th>
+                            </tr>
+                            <tr class="headings">
+
+                                <th class="column-title" colspan="5" style="text-align: center;background-color: #1A82C3;color: #fff !important;">
+                                    Demande traitées 
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+
+
+                            <tr class="even pointer">
+
+                                <th class=" " style="height: 58px;">Activiés</th>
+                                <th class=" ">Priorité Haute</th>
+                                <th class=" ">Priorité Moyenne</th>
+                                <th class=" ">Priorité Basse</th>
+                                <th class=" ">Priorité Non Définie</th>
+                                <th class=" " style="background-color: #0F0090;color: #fff !important;">Total traité</th>
+                            </tr>
+
+                            <tr class="even pointer">
+
+                                <th class=" " style="text-align: left;">Evolution</th>
+                                <td class=" "><span id="evo1"></span></td>
+                                <td class=" "><span id="evo2"></span></td>
+                                <td class=" "><span id="evo3"></span></td>
+                                <td class=" "><span id="evo4"></span></td>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="totaltraitEvol"></td>
+                            </tr>
+                            <tr class="even pointer">
+
+                                <th class=" " style="text-align: left;">Incident</th>
+                                <td class=" " ><span id="incid1"></span></td>
+                                <td class=" " ><span id="incid2"></span></td>
+                                <td class="" ><span id="incid3"></span></td>
+                                <td class=" " ><span id="incid4"></span></td>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="totaltraitIncid"></td>
+                            </tr>
+
+                            <tr class="even pointer">
+
+                                <th class=" " style="text-align: left;">Assistance Utilisateur</th>
+                                <td class=" " ><span id="Assis1"></span></td>
+                                <td class=" " ><span id="Assis2"></span></td>
+                                <td class=" " ><span id="Assis3"></span></td>
+                                <td class=" " ><span id="Assis4"></span></td>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="totaltraitAssist"></td>
+
+                            </tr>
+
+                            <tr class="even pointer">
+
+                                <th class=" " style="text-align: left;background-color: #0F0090;color: #fff !important;">Total</th>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="totalhaut"></td>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="totalmoyenn"></td>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="totalbass"></td>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="tatlnondefini"></td>
+                                <td class=" " style="background-color: #0F0090;color: #fff !important;" id="totaltrait"></td>
+                               
+                            </tr>
+                          
+                        </tbody>
+
+
+                    </table>
+                    <!-- Demande traitées dans le mois de janviér ___________________________________-->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    Demandes traitées dans le mois : <br> <small>Réparation des priorités our chaque type de demande Mois de Janvier</small>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @*<canvas id="canvas_bar"></canvas>*@
+                    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Commontaire le CP</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <form  class="form-horizontal form-label-left" novalidate name="form">
+
+                        <fieldset>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+                                    Commantaire<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                    @*<textarea id="commantaire" required="required" name="textarea" class="form-control col-md-7 col-xs-12" disabled="true"></textarea>*@
+
+                                    @Html.TextArea("Commantaire", null, new { @class = "form-control", @disabled = true })
+
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+
+                                    
+                                    <input class="btn btn-default" type="button" value="Modifier" id="cmt" onclick="desactiver()">
+                                    <button class="btn btn-primary" style="background-color: #0F0090;color: #fff !important;" id="enregistre">Enregistrer</button>
+                                   
+                                    
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer content -->
+    <footer>
+        <div class="">
+            <p class="pull-right">
+                TMA. |
+                <span class="lead"> <i class="fa fa-paw"></i> TDB!</span>
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+
+</div>
+<script>
+    function desactiver() {
+        document.form.Commantaire.disabled = false;
+    }
+
+    
+    </script>
+
+
+<script>
+
+    $(document).ready(function () {
+        var m;
+        $("#Projet").change(function () {
+  
+
+            $("#DataYear").empty();
+            $("#txtSearch").empty();
+            $("#commantaire").empty();
+            $("#mois").empty();
+            $("#evo1").empty();
+            $("#evo2").empty();
+            $("#evo3").empty();
+            $("#evo4").empty();
+
+            $("#incid1").empty();
+            $("#incid2").empty();
+            $("#incid3").empty();
+            $("#incid4").empty();
+
+            $("#Assis1").empty();
+            $("#Assis2").empty();
+            $("#Assis3").empty();
+            $("#Assis4").empty();
+
+
+            $("#totaltraitEvol").empty()
+            $("#totaltraitIncid").empty()
+            $("#totaltraitAssist").empty()
+            $("#totalhaut").empty();
+            $("#totalbass").empty();
+            $("#tatlnondefini").empty();
+            $("#totalmoyenn").empty();
+            $("#Commantaire").empty();
+            $("#totaltrait").empty();
+            $.ajax({
+                url: "@Url.Action("GetYearbyProject", "VolumeMois")",
+
+                data: { p: $('#Projet').val() },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+
+                    $('#DataYear').append("<option>Selectionnez Année</option>");
+                    for (var i = 0; i < data.length; i++) {
+
+                       
+                        $('#DataYear').append('<option value="' + data[i].Year + '">' + data[i].Year + '</option>');
+
+                    }
+                },
+               
+            });
+        });
+        //emplire drop down Name
+        $('#DataYear').change(function () {
+
+            $("#txtSearch").empty();
+            $("#commantaire").empty();
+            $('#mois').empty();
+            $("#evo1").empty();
+            $("#evo2").empty();
+            $("#evo3").empty();
+            $("#evo4").empty();
+
+            $("#incid1").empty();
+            $("#incid2").empty();
+            $("#incid3").empty();
+            $("#incid4").empty();
+
+            $("#Assis1").empty();
+            $("#Assis2").empty();
+            $("#Assis3").empty();
+            $("#Assis4").empty();
+
+
+            $("#totaltraitEvol").empty()
+            $("#totaltraitIncid").empty()
+            $("#totaltraitAssist").empty()
+            $("#totalhaut").empty();
+            $("#totalbass").empty();
+            $("#tatlnondefini").empty();
+            $("#totalmoyenn").empty();
+            $("#totaltrait").empty();
+            $("#Commantaire").empty();
+            var test;
+            $.ajax({
+                url: "@Url.Action("GetMonthbyYear", "VolumeMois")",
+
+                data: { Year: $('#DataYear').val(), idp: $('#Projet').val() },
+                typ: "POST",
+                datatype: "Json",
+                success: function (data) {
+
+
+                    $('#txtSearch').append("<option>Selectionez le Mois</option>");
+                    //$('#mois').append("Selectionnez Un Mois");
+                    
+                    var tab = new Array;
+                    tab[1] = "Janvier";
+                    tab[2] = "Février";
+                    tab[3] = "Mars";
+                    tab[4] = "Avril";
+                    tab[5] = "Mai";
+                    tab[6] = "Juin";
+                    tab[7] = "Juillet";
+                    tab[8] = "Août";
+                    tab[9] = "Septembre";
+                    tab[10] = "Octobre";
+                    tab[11] = "novembre";
+                    tab[12] = "décembre";
+                   
+                    for (var i = 0; i < data.length; i++) {
+                        for (var j = 0; j < tab.length; j++) {
+                            
+                            if (data[i].Month == j) {
+                                
+                               
+                                $('#txtSearch').append('<option value="' + data[i].Month + '">' + tab[j] + '</option>');
+                               
+                            }
+                        }
+                    }
+                  
+                   
+                },
+                async: false
+            });
+        });
+
+        // Get Priority Evolotion
+        $("#txtSearch").change(function () {
+            $("#mois").empty();
+            $("#commantaire").empty();
+            var haut1 = 0, haut2 = 0, haut3 = 0, moyenne1 = 0, moyenne2 = 0, moyenne3 = 0, basse1 = 0, basse2 = 0, basse3 = 0, nonDefini1 = 0, nonDefini2 = 0, nonDefini3 = 0;
+            var haute1 = 0, haute2 = 0, haute3 = 0, moyennee1 = 0, moyennee2 = 0, moyennee3 = 0, bassee1 = 0, bassee2 = 0, bassee3 = 0, nonDefinie1 = 0, nonDefinie2 = 0, nonDefinie3 = 0;
+            $("#evo1").empty();
+            $("#evo2").empty();
+            $("#evo3").empty();
+            $("#evo4").empty();
+
+            $("#incid1").empty();
+            $("#incid2").empty();
+            $("#incid3").empty();
+            $("#incid4").empty();
+
+            $("#Assis1").empty();
+            $("#Assis2").empty();
+            $("#Assis3").empty();
+            $("#Assis4").empty();
+
+          
+            $("#totaltraitEvol").empty()
+            $("#totaltraitIncid").empty()
+            $("#totaltraitAssist").empty()
+            $("#totalhaut").empty();
+            $("#totalbass").empty();
+            $("#tatlnondefini").empty();
+            $("#totalmoyenn").empty();
+            $("#totaltrait").empty();
+            $("#Commantaire").empty();
+
+
+            // Ajax Priority Evolution
+            $.ajax({
+                url: "@Url.Action("GetCountPriorityEvo", "VolumeMois")",
+               
+                data: { m: $('#txtSearch').val(), y: $('#DataYear').val(), idp: $('#Projet').val() },
+                type: "POST",
+                dataType: "Json",
+
+                success: function (data) {
+
+                  
+                    for (y = 0; y < data.length; y++) {
+
+                        if (data[y].High !="") { $("#evo1").text(data[y].High); } else { $("#evo1").text("0"); }
+                        if (data[y].Moyenne !="") { $("#evo2").text(data[y].Moyenne); } else { $("#evo2").text("0"); }
+                        if (data[y].Basse !="") { $("#evo3").text(data[y].Basse); } else { $("#evo3").text("0"); }
+                        if (data[y].Undifined != "") { $("#evo4").text(data[y].Undifined); } else { $("#evo4").text("0"); }
+
+
+                        haut1 = data[y].High;
+                        moyenne1 = data[y].Moyenne;
+                        basse1 = data[y].Basse;
+                        nonDefini1 = data[y].Undifined;
+
+
+                    }
+               
+                },
+                async: false
+            });
+
+           //Ajax Priority Incident
+            $.ajax({
+                url: "@Url.Action("GetCountPriorityAnom", "VolumeMois")",
+               
+              data: { m: $('#txtSearch').val(), y: $('#DataYear').val(), idp: $('#Projet').val() },
+            type: "POST",
+            dataType: "Json",
+
+            success: function (data) {
+               
+                for (var i = 0; i < data.length; i++) {
+             
+                      
+                    if (data[i].High != "") { $("#incid1").text(data[i].High); } else { $("#incid1").text("0"); }
+                    if (data[i].Moyenne != "") { $("#incid2").text(data[i].Moyenne); } else { $("#incid2").text("0"); }
+                    if (data[i].Basse != "") { $("#incid3").text(data[i].Basse); } else { $("#incid3").text("0"); }
+                    if (data[i].Undifined != "") { $("#incid4").text(data[i].Undifined); } else { $("#incid4").text("0"); }
+                    haut2 = data[i].High;
+                    moyenne2 = data[i].Moyenne;
+                    basse2 = data[i].Basse;
+                    nonDefini2 = data[i].Undifined;
+                }
+
+             
+
+            },
+            async: false
+            });
+
+            //Priority Assistance
+            $.ajax({
+                url: "@Url.Action("GetCountPriorityAssist", "VolumeMois")",
+               
+                data: { m: $('#txtSearch').val(), y: $('#DataYear').val(), idp: $('#Projet').val() },
+            type: "POST",
+            dataType: "Json",
+
+            success: function (data) {    
+                for (j =0; j < data.length; j++) {
+
+                    if (data[j].High != "") { $("#Assis1").text(data[j].High); } else { $("#Assis1").text("0"); }
+                    if (data[j].Moyenne != "") { $("#Assis2").text(data[j].Moyenne); } else { $("#Assis2").text("0"); }
+                    if (data[j].Basse != "") { $("#Assis3").text(data[j].Basse); } else { $("#Assis3").text("0"); }
+                    if (data[j].Undifined != "") { $("#Assis4").text(data[j].Undifined); } else { $("#Assis4").text("0"); }
+                    haut3 = data[j].High;
+                    moyenne3= data[j].Moyenne;
+                    basse3 = data[j].Basse;
+                    nonDefini3 = data[j].Undifined;
+                }
+
+            },
+            async: false
+            });
+
+
+
+            
+            
+            
+            
+
+            var totalhaut = (haut1 + haut2 + haut3);
+           // console.log(totalhaut);
+            if (totalhaut) { $("#totalhaut").text(totalhaut); } else { $("#totalhaut").text("0"); }
+            //Total Moyenne
+
+            var totalmoyenne = (moyenne1 + moyenne2 + moyenne3);
+
+            // console.log(totalmoyenne);
+            if (totalmoyenne) { $("#totalmoyenn").text(totalmoyenne); } else { $("#totalmoyenn").text("0"); }
+
+            //Total Basse
+            var totalbasse = (basse1 + basse2 + basse3);
+           // console.log(totalbasse);
+            if (totalbasse) { $("#totalbass").text(totalbasse); } else { $("#totalbass").text("0"); }
+
+            //Totale Non Defini
+
+            var totalnonDefini = (nonDefini1 + nonDefini2 + nonDefini3);
+           // console.log(totalnonDefini);
+            if (totalnonDefini) { $("#tatlnondefini").text(totalnonDefini); } else { $("#tatlnondefini").text("0"); }
+
+            //Total Traité Evolution
+            var TTE = (haut1 + moyenne1 + basse1 + nonDefini1);
+            if (TTE){$("#totaltraitEvol").text(TTE);}else{$("#totaltraitEvol").text("0");}
+
+            //Total Traité Incident
+            var TTI = (haut2 + moyenne2 + basse2 + nonDefini2);
+            if (TTI){$("#totaltraitIncid").text(TTI);}else{$("#totaltraitIncid").text("0");}
+
+
+            //Total Traité Assitance Utilisateur
+            var TTAU = (haut3 + moyenne3 + basse3 + nonDefini3);
+            if (TTAU){$("#totaltraitAssist").text(TTAU);}else{$("#totaltraitAssist").text("0");}
+
+
+            //Total Traité 
+            var TT = (TTE + TTI + TTAU)
+            if (TT) { $("#totaltrait").text(TT); } else { $("#totaltrait").text("0"); }
+
+                $('#container').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                colors: [
+            '#0F0090',
+            '#F70000',
+            '#6F757C',
+            '#4974AB',
+                ],
+                title: {
+                    text: 'Statistique de TMA'
+                },
+                xAxis: {
+                    categories: ['Evolution', 'Incident', 'Assistance Utilisateur']
+                },
+                yAxis: {
+                    min: 0,
+                   
+                    title: {
+                        text: 'Total le Nom de Project'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    x: -30,
+                    verticalAlign: 'top',
+                    y: -11,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.x}</b><br/>',
+                    pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                            style: {
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    }
+                },
+
+                series: [
+                   {
+                       name: 'Priorité Haute',
+                       data: [haut1, haut2, haut3]
+                   },
+                    {
+                        name: 'Priorité  Moyenne',
+                        data: [moyenne1, moyenne2, moyenne3]
+                    },
+                 {
+                     name: 'Priorité Basse',
+                     data: [basse1, basse2, basse3]
+                 },
+                 {
+                     name: 'Priorité  Non Definis',
+                     data: [nonDefini1, nonDefini2, nonDefini3]
+                 }
+
+                ]
+                });
+
+            // En Stock________________________________________________________
+                $.ajax({
+                    url: "@Url.Action("GetCountPriorityEnStockEvo", "VolumeMois")",
+               
+                    data: { m: $('#txtSearch').val(), y: $('#DataYear').val(), idp: $('#Projet').val() },
+            type: "POST",
+            dataType: "Json",
+
+            success: function (data) {
+
+                  
+                    for (y = 0; y < data.length; y++) {
+
+
+                       
+                        haute1 = data[y].High;
+                        moyennee1 = data[y].Moyenne;
+                        bassee1 = data[y].Basse;
+                        nonDefinie1 = data[y].Undifined;
+
+
+                    }
+               
+                },
+            async: false
+        });
+
+        //Ajax Priority Incident
+        $.ajax({
+            url: "@Url.Action("GetCountPriorityEnStockAnom", "VolumeMois")",
+               
+            data: { m: $('#txtSearch').val(), y: $('#DataYear').val(), idp: $('#Projet').val() },
+        type: "POST",
+        dataType: "Json",
+
+        success: function (data) {
+               
+            for (var i = 0; i < data.length; i++) {
+            
+                haute2 = data[i].High;
+                moyennee2 = data[i].Moyenne;
+                bassee2 = data[i].Basse;
+                nonDefinie2 = data[i].Undifined;
+               
+            }
+
+             
+
+        },
+        async: false
+    });
+
+        //Priority Assistance
+        $.ajax({
+            url: "@Url.Action("GetCountPriorityEnStockAssist", "VolumeMois")",
+               
+            data: { m: $('#txtSearch').val(), y: $('#DataYear').val(), idp: $('#Projet').val() },
+        type: "POST",
+            dataType: "Json",
+
+        success: function (data) {    
+            for (j =0; j < data.length; j++) {
+
+                haute3 = data[j].High;
+                moyennee3= data[j].Moyenne;
+                bassee3 = data[j].Basse;
+                nonDefinie3 = data[j].Undifined;
+             
+            }
+
+        },
+        async: false
+        });
+
+
+            //Total Evolution En Stock
+            var tees = (haute1 + moyennee1 + bassee1 + nonDefinie1);
+            
+            if (tees) { $("#EvoStock").text(tees); } else { $("#EvoStock").text("0"); }
+
+            //Total  Incident En Stock
+            var ties = (haute2 + moyennee2 + bassee2 + nonDefinie2);
+            if (ties) { $("#IncidStock").text(ties); } else { $("#IncidStock").text("0"); }
+
+
+            //Total Assitance Utilisateur En Stock
+            var taues = (haute3 + moyennee3 + bassee3 + nonDefinie3);
+            if (taues) { $("#AssistStock").text(taues); } else { $("#AssistStock").text("0"); }
+
+
+            //Total En Stock
+            var tes = (tees + ties + taues)
+            if (tes) { $("#totaltraitEnStock").text(tes); } else { $("#totaltraitEnStock").text("0"); }
+
+
+            $.ajax({
+                url: "@Url.Action("GetCommentaire", "VolumeMois")",
+             data: "",
+            type: "GET",
+            dataType: "Json",
+            success: function (data) {
+
+                for (i = 0; i < data.length; i++)
+                {
+                    $("#Commantaire").append(data[i].commentaire);
+                }
+               
+            },
+            error: function()
+            {
+                $("#Commantaire").text("Ajouter une Commentaire");
+            },
+            });
+
+
+           
+            });
+
+    });
+
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#enregistre').click(function () {
+           
+            var comment = $('#Commantaire').val();
+            SendComment(comment);
+        });
+    });
+
+    function SendComment(comment) {
+
+        // Stop the page from "following" the button (ie. submitting the form)
+
+        // Call an AJAX function to the proper page
+
+        $.ajax({
+           
+            url: "@Url.Action("UpdateComment", "VolumeMois")",
+            data: { 'comment': comment },
+            type: "POST",
+            dataType: 'json',
+            success: function (response) {
+
+                alert("enregistré avec succées!");
+            },
+           
+        });
+    }
+
+</script>
+
+
+
+
+
